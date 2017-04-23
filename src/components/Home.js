@@ -6,6 +6,6 @@ export default class Home extends Component {
       <div>
         Home. Not Protected. Anyone can see this.
       </div>
-    )
+    );
   }
 }
