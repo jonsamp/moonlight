@@ -8,6 +8,7 @@ import Listings from './protected/Listings';
 import Profile from './protected/Profile';
 import { logout } from '../helpers/auth';
 import { firebaseAuth } from '../config/constants';
+import Logo from '../images/logo.svg';
 
 function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
@@ -55,13 +56,16 @@ export default class App extends Component {
     this.removeListener();
   }
   render() {
+    console.log(Logo);
     return this.state.loading === true ? <h1>Loading</h1> : (
       <BrowserRouter>
         <div>
           <nav className="navbar navbar-default navbar-static-top">
             <div className="container">
               <div className="navbar-header">
-                <Link to="/" className="navbar-brand">🌛 moonlight</Link>
+                <Link to="/" className="navbar-brand">
+                  <img src={Logo} style={{ height: '25px'}}/>
+                </Link>
               </div>
               <ul className="nav navbar-nav pull-right">
                 <li>
