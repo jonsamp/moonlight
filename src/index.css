@@ -17,3 +17,25 @@ body {
   color: white;
   opacity: 0.8;
 }
+
+.moonlight-request {
+  border-color: #484848;
+  border-width: 2px;
+  border-radius: 2px;
+  border-style: solid;
+}
+
+.request-body {
+  background-color: grey;
+  margin: 0em;
+}
+
+.request-action-group {
+  background-color: #00a699;
+
+}
+
+.request-identity {
+  background-color: #FC642D;
+
+}
