@@ -36,27 +36,35 @@ export default class App extends Component {
   state = {
     authed: false,
     loading: true,
+    user: {}
   }
+
   componentDidMount() {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
           authed: true,
           loading: false,
+          user
         });
       } else {
         this.setState({
           authed: false,
           loading: false,
+          user: {}
         });
       }
     });
   }
+
   componentWillUnmount() {
     this.removeListener();
   }
+
+  getUser = (user) => {
+    this.setState({ user });
+  }
   render() {
-    console.log(Logo);
     return this.state.loading === true ? <h1>Loading</h1> : (
       <BrowserRouter>
         <div>
@@ -97,7 +105,7 @@ export default class App extends Component {
                 <Route path="/" exact component={Home} />
                 <PublicRoute authed={this.state.authed} path="/login" component={Login} />
                 <PublicRoute authed={this.state.authed} path="/register" component={Register} />
-                <PrivateRoute authed={this.state.authed} path="/listings" component={Listings} />
+                <PrivateRoute authed={this.state.authed} path="/listings" component={() => (<Listings {...this.state} />)} />
                 <PrivateRoute authed={this.state.authed} path="/profile" component={Profile} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>

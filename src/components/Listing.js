@@ -1,6 +1,8 @@
 import React from 'react';
 import belle from 'belle';
 
+import { deletePost } from '../helpers/auth';
+
 const Card = belle.Card;
 const Button = belle.Button;
 
@@ -9,13 +11,16 @@ export default class Listings extends React.Component {
     super(props);
     this.openModal = this.openModal.bind(this.props.id);
   }
-  openModal() {
+  openModal = () => {
     console.log('open-modal clicked on id:', this.props.id);
   }
-  deleteRequest() {
-    console.log('deleteRequest was clicked on id:', this.props.id);
+  deleteRequest = () => {
+    const { requesterId, id } = this.props;
+    deletePost(requesterId, id).then(() => {
+      this.props.deleteSinglePostFromList(id);
+    });
   }
-  fullfillRequest() {
+  fullfillRequest = () => {
     console.log('fullfillRequest was clicked on id:', this.props.id);
   }
   // this renderButtons needs to consider if the user is the owner or not - we might need to maintain a list of "owned listings" for each
@@ -31,10 +36,7 @@ export default class Listings extends React.Component {
   }
 
   render() {
-    const requester = this.props.requester;
-    const details = this.props.details;
-    const jobLocation = this.props.jobLocation;
-    const duration = this.props.duration;
+    const { requester, details, jobLocation, duration } = this.props;
     return (
       <Card>
         <h1>{requester}</h1>
