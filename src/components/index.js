@@ -36,7 +36,7 @@ export default class App extends Component {
   state = {
     authed: false,
     loading: true,
-    user: {}
+    user: {},
   }
 
   componentDidMount() {
@@ -64,6 +64,7 @@ export default class App extends Component {
   getUser = (user) => {
     this.setState({ user });
   }
+
   render() {
     return this.state.loading === true ? <h1>Loading</h1> : (
       <BrowserRouter>
@@ -106,7 +107,7 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path="/login" component={Login} />
                 <PublicRoute authed={this.state.authed} path="/register" component={Register} />
                 <PrivateRoute authed={this.state.authed} path="/listings" component={() => (<Listings {...this.state} />)} />
-                <PrivateRoute authed={this.state.authed} path="/profile" component={Profile} />
+                <PrivateRoute authed={this.state.authed} path="/profile" component={() => (<Profile {...this.state} />)} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

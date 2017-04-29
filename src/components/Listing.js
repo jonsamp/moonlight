@@ -1,7 +1,7 @@
 import React from 'react';
 import belle from 'belle';
 
-import { deletePost, fulfillRequest } from '../helpers/databaseHelpers';
+import { deletePost, fulfillRequest, getUser } from '../helpers/userActions';
 
 const Card = belle.Card;
 const Button = belle.Button;
@@ -10,6 +10,16 @@ export default class Listings extends React.Component {
   constructor(props) {
     super(props);
     this.openModal = this.openModal.bind(this.props.id);
+  }
+
+  state = {
+    avatarUrl: `https://avatar.tobi.sh/${this.props.requesterId}`
+  }
+
+  componentDidMount = () => {
+    getUser(this.props.requesterId).then((user) => {
+      this.setState({ avatarUrl: user.avatar_url });
+    });
   }
 
   openModal = () => {
@@ -43,8 +53,10 @@ export default class Listings extends React.Component {
 
   render() {
     const { requester, details, jobLocation, duration, fulfilled } = this.props;
+
     return (
       <Card>
+        <img className="listing-avatar" src={this.state.avatarUrl} alt={`${requester} avatar`} />
         <h1>{requester}</h1>
         <p>{`Requesting a doctor for ${duration} in ${jobLocation}`}</p>
         <p>{details}</p>

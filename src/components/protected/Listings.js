@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import Listing from '../Listing';
 import Toolbar from '../Toolbar';
-import { savePost, getAllPosts } from '../../helpers/databaseHelpers.js';
+import { savePost, getAllPosts, getUser } from '../../helpers/userActions';
 
 // Random lady names for card distinction before we have a form.
 const names = [
@@ -82,11 +82,15 @@ export default class Listings extends Component {
   }
 
   renderListings = () => {
-    if (this.state.listings) {
-      return this.state.listings.map((listing) => {
-        return (<Listing key={`listing-${listing.id}`} {...listing} deleteSinglePostFromList={this.deleteSinglePostFromList} toggleFulfilled={this.toggleFulfilled} />);
-      });
-    }
+    return this.state.listings.map((listing) => {
+      return (
+        <Listing
+          deleteSinglePostFromList={this.deleteSinglePostFromList} toggleFulfilled={this.toggleFulfilled}
+          key={`listing-${listing.id}`}
+          {...listing}
+        />
+      );
+    });
   }
 
   render() {

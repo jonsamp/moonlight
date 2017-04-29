@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { db } from '../config/constants';
+import { db, storageRef } from '../config/constants';
 
 export function getAllPosts() {
 
@@ -59,4 +59,24 @@ export function fulfillRequest(userId, postId, fullFill = true) {
 
   // Update the table all at once
   return db().ref().update(updates);
+}
+
+
+export function getUser(userId) {
+  return db().ref(`users/${userId}/info`).once('value').then((snapshot) => {
+    return _.omit(snapshot.val(), 'posts');
+  });
+}
+
+function setAvatar(userId, avatarUrl) {
+  const updates = {};
+  updates[`users/${userId}/info/avatar_url`] = avatarUrl;
+  return db().ref().update(updates);
+}
+
+export function uploadAvatar(userId, file) {
+  const avatarRef = storageRef.child(userId);
+  avatarRef.put(file).then((snapshot) => {
+    setAvatar(userId, snapshot.a.downloadURLs[0]);
+  });
 }
