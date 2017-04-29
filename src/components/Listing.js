@@ -18,7 +18,7 @@ export default class Listings extends React.Component {
 
   componentDidMount = () => {
     getUser(this.props.requesterId).then((user) => {
-      this.setState({ avatarUrl: user.avatar_url });
+      this.setState({ avatarUrl: user.avatarUrl || user.avatar_url });
     });
   }
 

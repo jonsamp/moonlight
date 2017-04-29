@@ -64,13 +64,19 @@ export function fulfillRequest(userId, postId, fullFill = true) {
 
 export function getUser(userId) {
   return db().ref(`users/${userId}/info`).once('value').then((snapshot) => {
-    return _.omit(snapshot.val(), 'posts');
+    return snapshot.val();
+  });
+}
+
+export function getAllUserData(userId) {
+  return db().ref(`users/${userId}`).once('value').then((snapshot) => {
+    return snapshot.val();
   });
 }
 
 function setAvatar(userId, avatarUrl) {
   const updates = {};
-  updates[`users/${userId}/info/avatar_url`] = avatarUrl;
+  updates[`users/${userId}/info/avatarUrl`] = avatarUrl;
   return db().ref().update(updates);
 }
 
