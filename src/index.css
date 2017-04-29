@@ -22,3 +22,43 @@ body {
   width: 50px;
   height: 50px;
 }
+
+.moonlight-request {
+  //border-color: #484848;
+  //border-width: 2px;
+  //border-radius: 2px;
+  //border-style: solid;
+}
+
+.request-body {
+  //background-color: grey;
+  margin: 0em;
+  padding: 1em;
+}
+
+.request-action-group {
+  //background-color: #00a699;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  padding-left: 2em;
+
+}
+
+.request-action {
+  margin-right: 1em;
+  width: 16.6%;
+
+}
+
+@media (max-width: 770px) {
+  .request-action {
+    width: 30.3%;
+
+  }
+}
+
+.request-identity {
+  //background-color: #FC642D;
+  padding: .25em;
+}
