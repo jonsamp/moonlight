@@ -62,3 +62,9 @@ body {
   //background-color: #FC642D;
   padding: .25em;
 }
+
+.profile img {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 1rem;
+}
