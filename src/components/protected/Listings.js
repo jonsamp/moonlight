@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import Listing from '../Listing';
 import Toolbar from '../Toolbar';
-import { savePost, getAllPosts } from '../../helpers/auth';
+import { savePost, getAllPosts } from '../../helpers/databaseHelpers.js';
 
 // Random lady names for card distinction before we have a form.
 const names = [
@@ -54,6 +54,19 @@ export default class Listings extends Component {
     });
   }
 
+  toggleFulfilled = (postId) => {
+    const updatedList = this.state.listings.map((item) => {
+      const listing = item;
+      if (item.id === postId) {
+        listing.fulfilled = true;
+      }
+      return listing;
+    });
+    this.setState({
+      listings: updatedList,
+    });
+  }
+
   // placeholder to create sample requests
   sendPostToDB = () => {
     return savePost(this.props.user, {
@@ -62,6 +75,7 @@ export default class Listings extends Component {
       jobLocation: 'Salina, KS',
       duration: '4 days',
       details: "I'll be out of the office for 4 days on vacation. I have about 20 patients but on average only 3 contact me a day - should be pretty laid back.",
+      fulfilled: false
     }).then((postData) => {
       this.addSinglePostToList(postData);
     });
@@ -70,7 +84,7 @@ export default class Listings extends Component {
   renderListings = () => {
     if (this.state.listings) {
       return this.state.listings.map((listing) => {
-        return (<Listing key={`listing-${listing.id}`} {...listing} deleteSinglePostFromList={this.deleteSinglePostFromList} />);
+        return (<Listing key={`listing-${listing.id}`} {...listing} deleteSinglePostFromList={this.deleteSinglePostFromList} toggleFulfilled={this.toggleFulfilled} />);
       });
     }
   }
