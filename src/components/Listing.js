@@ -1,5 +1,6 @@
 import React from 'react';
 import belle from 'belle';
+import { Row, Media, Col, Glyphicon } from 'react-bootstrap';
 
 import { deletePost, fulfillRequest, getUser } from '../helpers/userActions';
 
@@ -9,11 +10,10 @@ const Button = belle.Button;
 export default class Listings extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      avatarUrl: `https://avatar.tobi.sh/${this.props.requesterId}`,
+    };
     this.openModal = this.openModal.bind(this.props.id);
-  }
-
-  state = {
-    avatarUrl: `https://avatar.tobi.sh/${this.props.requesterId}`
   }
 
   componentDidMount = () => {
@@ -43,25 +43,49 @@ export default class Listings extends React.Component {
   // user for this reason. This keeps the logic on the firebase side - we could do something simpler for now though
   renderButtons(fulfilled) {
     return (
-      <div className={'request-action-group'}>
-        <Button onClick={this.deleteRequest}>Delete</Button>
-        <Button onClick={this.fullfillRequest}>{ fulfilled ? "Fulfilled!!!" : "Fulfill" }</Button>
-        <Button onClick={this.openModal}>View</Button>
-      </div>
+      <Row className="request-action-group">
+        <Button className="request-action" onClick={this.deleteRequest}>Delete</Button>
+        <Button className="request-action" onClick={this.fullfillRequest}>{ fulfilled ? 'Fulfilled!!!' : 'Fulfill' }</Button>
+        <Button className="request-action" primary onClick={this.openModal}>View</Button>
+      </Row>
+    );
+  }
+
+  renderBody = () => {
+    const { requester, details, jobLocation, duration, fulfilled } = this.props;
+    return (
+      <Row className="request-body">
+        <Col md={8}>
+          <Media.Heading>{requester}</Media.Heading>
+          <p>{`Requesting a doctor for ${duration} in ${jobLocation}`}</p>
+          <p>{details}</p>
+        </Col>
+        <Col md={4}>
+          <h5><Glyphicon glyph="time" /> {'Dates'}</h5>
+          <p>{duration}</p>
+          <h5><Glyphicon glyph="map-marker" /> {'Location'}</h5>
+          <p>{jobLocation}</p>
+        </Col>
+
+      </Row>
     );
   }
 
   render() {
     const { requester, details, jobLocation, duration, fulfilled } = this.props;
-
     return (
       <Card>
-        <img className="listing-avatar" src={this.state.avatarUrl} alt={`${requester} avatar`} />
-        <h1>{requester}</h1>
-        <p>{`Requesting a doctor for ${duration} in ${jobLocation}`}</p>
-        <p>{details}</p>
-        {this.renderButtons(fulfilled)}
+        <Media className="moonlight-request">
+          <Media.Left className="request-identity">
+            <img className="listing-avatar" src={this.state.avatarUrl} alt={`${requester} avatar`} />
+          </Media.Left>
+          <Media.Body>
+            {this.renderBody()}
+            {this.renderButtons()}
+          </Media.Body>
+        </Media>
       </Card>
+
     );
   }
 }
