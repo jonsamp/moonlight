@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { auth, signInWithPopup } from '../helpers/auth';
+import { Row, Col } from 'react-bootstrap';
+import { auth } from '../helpers/auth';
 import belle from 'belle';
 
+const Card = belle.Card;
 const Button = belle.Button;
 
 function setErrorMsg(error) {
@@ -19,9 +21,10 @@ export default class Register extends Component {
   }
   render () {
     return (
-      <div className="col-sm-6 col-sm-offset-3">
+      <Row className="login">
+        <Col xs={10} xsOffset={1} sm={8} smOffset={2} md={6} mdOffset={3}>
+        <Card style={{ borderRadius: "6px" }}>
         <h1>Register</h1>
-        <Button onClick={() => signInWithPopup('twitter')}>Sign in with Twitter</Button>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>First Name</label>
@@ -47,9 +50,11 @@ export default class Register extends Component {
               &nbsp;{this.state.registerError}
             </div>
           }
-          <button type="submit" className="btn btn-primary">Register</button>
+          <Button type="submit" primary style={{ width: '100%' }}>Register</Button>
         </form>
-      </div>
+        </Card>
+      </Col>
+    </Row>
     )
   }
 }

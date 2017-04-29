@@ -52,7 +52,7 @@ export function auth(firstName, lastName, email, pw) {
 
 export function signInWithPopup(source) {
   const providers = {
-    github: new firebaseAuth.GithubAuthProvider(),
+    google: new firebaseAuth.GoogleAuthProvider(),
     twitter: new firebaseAuth.TwitterAuthProvider(),
     facebook: new firebaseAuth.FacebookAuthProvider()
   }
