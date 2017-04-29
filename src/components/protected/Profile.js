@@ -6,7 +6,7 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
-        <h1> Profile </h1>
+        <h1> { this.props.user.email } </h1>
         <ImageUploader userId={this.props.user.uid} />
       </div>);
   }
