@@ -113,3 +113,37 @@ body {
   max-height: 50px;
   border-radius: 1rem;
 }
+
+@keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.uil-ring-css {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  box-shadow: 0 3px 0 0 #444444;
+  animation: uil-ring-anim 0.5s linear infinite;
+}
+
+.spinner {
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
