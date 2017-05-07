@@ -1,46 +1,78 @@
+.profile .user-info {
+  background-color: white;
+  padding: 2em;
+  border-radius: 2px; }
+
+.profile .user-info .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; }
+
+.profile .user-info .header .edit-btn {
+  width: 10em; }
+
+.profile .user-info .header .picture-name {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%; }
+
+.profile .user-info .header .picture-name .user-personal-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; }
+
+.profile .user-info .header .picture-name .user-personal-info .input-field {
+  min-width: 20em; }
+
+.profile .user-info .header .picture-name h1 {
+  margin: 0 0 0.25em 0; }
+
+.profile .user-info .header .picture-name img {
+  margin-right: 1em;
+  width: 100px;
+  height: 100px;
+  border-radius: 1em; }
+
+.profile .user-info .header .fileInput {
+  margin: 1em 0; }
+
 body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
-  background-color: #F2F2F2;
-}
+  background-color: #F2F2F2; }
 
 .navbar {
-  background: linear-gradient(150deg, rgb(10, 32, 45), rgb(1, 95, 130));
-}
+  background: linear-gradient(150deg, #0a202d, #015f82); }
 
 .navbar-default .navbar-brand {
-  color: white;
-}
+  color: white; }
 
 .navbar-default .navbar-nav li a {
-  color: white;
-}
+  color: white; }
 
 .listing-avatar {
   border-radius: 1rem;
   width: 50px;
-  height: 50px;
-}
+  height: 50px; }
 
 .login hr {
-  border-color: #b7b7b7
-}
+  border-color: #b7b7b7; }
 
 .login .button-group button {
-  margin-bottom: 1rem;
-}
+  margin-bottom: 1rem; }
 
 .login input {
   height: 4rem;
-  border-radius: 2px;
-}
+  border-radius: 2px; }
 
 .login h1 {
   margin: 0;
   padding: 2rem;
   color: white;
-  background: linear-gradient(150deg, rgb(1, 95, 130), rgb(10, 32, 45));
+  background: linear-gradient(150deg, #015f82, #0a202d);
   margin-bottom: 2rem;
   margin-left: -4rem;
   margin-right: -4rem;
@@ -49,70 +81,52 @@ body {
   background-size: 200% 200%;
   -webkit-animation: gradientSwell 4s ease infinite;
   -moz-animation: gradientSwell 4s ease infinite;
-  animation: gradientSwell 4s ease infinite;
-}
+  animation: gradientSwell 4s ease infinite; }
 
 @-webkit-keyframes gradientSwell {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@-moz-keyframes gradientSwell {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@keyframes gradientSwell {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
 
-.moonlight-request {
-  //border-color: #484848;
-  //border-width: 2px;
-  //border-radius: 2px;
-  //border-style: solid;
-}
+@-moz-keyframes gradientSwell {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
+
+@keyframes gradientSwell {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
 
 .request-body {
-  //background-color: grey;
   margin: 0em;
-  padding: 1em;
-}
+  padding: 1em; }
 
 .request-action-group {
-  //background-color: #00a699;
   display: flex;
   justify-content: flex-end;
   padding: 1em;
-  padding-left: 2em;
-
-}
+  padding-left: 2em; }
 
 .request-action {
   margin-right: 1em;
-  width: 16.6%;
-
-}
+  width: 16.6%; }
 
 @media (max-width: 770px) {
   .request-action {
-    width: 30.3%;
-
-  }
-}
+    width: 30.3%; } }
 
 .request-identity {
-  //background-color: #FC642D;
-  padding: .25em;
-}
-
-.profile img {
-  max-width: 50px;
-  max-height: 50px;
-  border-radius: 1rem;
-}
+  padding: .25em; }
 
 @keyframes uil-ring-anim {
   0% {
@@ -120,16 +134,14 @@ body {
     -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
     -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
+    transform: rotate(0deg); }
   100% {
     -ms-transform: rotate(360deg);
     -moz-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
     -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
+    transform: rotate(360deg); } }
+
 .uil-ring-css {
   position: relative;
   display: block;
@@ -137,13 +149,11 @@ body {
   height: 50px;
   border-radius: 50px;
   box-shadow: 0 3px 0 0 #444444;
-  animation: uil-ring-anim 0.5s linear infinite;
-}
+  animation: uil-ring-anim 0.5s linear infinite; }
 
 .spinner {
   width: 100vw;
   height: 40vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
+  align-items: center; }

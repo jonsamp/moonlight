@@ -1,0 +1,145 @@
+@import './styles/_profile.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  background-color: #F2F2F2;
+}
+
+.navbar {
+  background: linear-gradient(150deg, rgb(10, 32, 45), rgb(1, 95, 130));
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default .navbar-nav li a {
+  color: white;
+}
+
+.listing-avatar {
+  border-radius: 1rem;
+  width: 50px;
+  height: 50px;
+}
+
+.login hr {
+  border-color: #b7b7b7
+}
+
+.login .button-group button {
+  margin-bottom: 1rem;
+}
+
+.login input {
+  height: 4rem;
+  border-radius: 2px;
+}
+
+.login h1 {
+  margin: 0;
+  padding: 2rem;
+  color: white;
+  background: linear-gradient(150deg, rgb(1, 95, 130), rgb(10, 32, 45));
+  margin-bottom: 2rem;
+  margin-left: -4rem;
+  margin-right: -4rem;
+  margin-top: -4rem;
+  padding-left: 4rem;
+  background-size: 200% 200%;
+  -webkit-animation: gradientSwell 4s ease infinite;
+  -moz-animation: gradientSwell 4s ease infinite;
+  animation: gradientSwell 4s ease infinite;
+}
+
+@-webkit-keyframes gradientSwell {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes gradientSwell {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes gradientSwell {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.moonlight-request {
+  //border-color: #484848;
+  //border-width: 2px;
+  //border-radius: 2px;
+  //border-style: solid;
+}
+
+.request-body {
+  //background-color: grey;
+  margin: 0em;
+  padding: 1em;
+}
+
+.request-action-group {
+  //background-color: #00a699;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  padding-left: 2em;
+
+}
+
+.request-action {
+  margin-right: 1em;
+  width: 16.6%;
+
+}
+
+@media (max-width: 770px) {
+  .request-action {
+    width: 30.3%;
+
+  }
+}
+
+.request-identity {
+  //background-color: #FC642D;
+  padding: .25em;
+}
+
+@keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.uil-ring-css {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  box-shadow: 0 3px 0 0 #444444;
+  animation: uil-ring-anim 0.5s linear infinite;
+}
+
+.spinner {
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

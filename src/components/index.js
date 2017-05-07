@@ -9,6 +9,7 @@ import Profile from './protected/Profile';
 import { logout } from '../helpers/auth';
 import { firebaseAuth } from '../config/constants';
 import Logo from '../images/logo.svg';
+import Spinner from './Spinner';
 
 function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
@@ -66,7 +67,7 @@ export default class App extends Component {
   }
 
   render() {
-    return this.state.loading === true ? <h1>Loading</h1> : (
+    return this.state.loading === true ? <Spinner /> : (
       <BrowserRouter>
         <div>
           <nav className="navbar navbar-default navbar-static-top">
