@@ -1,4 +1,5 @@
 import { ref, firebaseAuth, db } from '../config/constants';
+import { getUser } from './userActions'
 
 export function logout() {
   return firebaseAuth().signOut();
@@ -58,6 +59,10 @@ export function signInWithPopup(source) {
   }
   return firebaseAuth().signInWithPopup(providers[source])
     .then((result) => {
-      saveUser(result.user);
+      getUser(result.user.uid).then((data) => {
+        if (!data) {
+          saveUser(result.user);
+        }
+      })
     })
 }

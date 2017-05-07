@@ -123,9 +123,8 @@ class Profile extends React.Component {
 
     // Make sure the user is loaded, otherwise show a spinner
     if (this.state.user.info) {
-      const { displayName, uid, posts, email } = this.state.user.info
+      const { uid, info: { displayName, email }, posts } = this.state.user
       const avatarUrl = this.state.user.info.avatarUrl || this.state.user.info.avatar_url
-
 
       return (
         <section className="profile">
@@ -136,7 +135,7 @@ class Profile extends React.Component {
                   this.renderUserHeaderEditable(displayName, email, avatarUrl)
               }
           </section>
-          {/* <Button onClick={() => deleteUser(uid, Object.values(posts))} style={{background: '#A91912', color: 'white'}}>Delete Account and Posts</Button> */}
+          <Button onClick={() => deleteUser(uid, Object.values(posts))} style={{background: '#A91912', color: 'white'}}>Delete Account and Posts</Button>
         </section>
       )
     } else {
