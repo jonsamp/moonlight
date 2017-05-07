@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { uploadAvatar } from '../helpers/userActions';
 import belle from 'belle';
+import Spinner from './Spinner';
+import { uploadAvatar } from '../helpers/userActions';
 
 const Button = belle.Button;
 
@@ -11,17 +12,19 @@ class ImageUploader extends Component {
   }
 
   state = {
-    uploaded: false
+    uploaded: false,
+    uploading: false
   }
 
   _handleSubmit(e) {
     e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log('handle uploading-', this.state.file);
-    uploadAvatar(this.props.userId, this.state.file).then((url) => {
-      this.setState({ uploaded: true })
-      this.props.setAvatarUrl(url)
-    });
+    this.setState({ uploading: true }, () => {
+      uploadAvatar(this.props.userId, this.state.file).then((url) => {
+        this.setState({ uploaded: true });
+        this.props.setAvatarUrl(url);
+        this.setState({ uploading: false });
+      });
+    })
   }
 
   _handleImageChange(e) {
@@ -61,9 +64,19 @@ class ImageUploader extends Component {
           <input className="fileInput"
             type="file"
             onChange={(e)=>this._handleImageChange(e)} />
-          <Button className="submitButton"
+          <Button className="image-upload-submit-button"
             type="submit"
-            onClick={(e)=>this._handleSubmit(e)} primary>{this.state.uploaded ? 'Uploaded!' : 'Upload Image'}</Button>
+            onClick={(e)=>this._handleSubmit(e)}
+            primary
+          >
+            {
+              this.state.uploading ?
+              (<p><Spinner fill="white" size='1em' /></p>) :
+              this.state.uploaded ?
+                'Uploaded!' :
+                'Upload Image'
+            }
+          </Button>
         </form>
       </div>
     )

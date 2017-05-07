@@ -75,27 +75,39 @@ class Profile extends React.Component {
         <div className="picture-name">
           <img src={avatarUrl} alt={`${displayName}'s avatar`} />
           <div>
-            <h1>{displayName || 'peggy'}</h1>
+            <h1>{displayName}</h1>
             <p>{email}</p>
           </div>
         </div>
         <Button primary
-          className="edit-btn" onClick={this.toggleEditing}>Edit Profile</Button>
+          className="edit-btn"
+          onClick={this.toggleEditing}
+        >
+          Edit&nbsp;Profile
+        </Button>
       </div>
     )
   }
 
-  renderUserHeaderEditable = (displayName, email, avatarUrl) => {
+  renderUserHeaderEditable = (displayName, email, avatarUrl, uid) => {
     return (
       <div className="header">
         <div className="picture-name">
-          <ImageUploader userId={this.props.user.uid} avatarUrl={avatarUrl}
-          setAvatarUrl={this.setAvatarUrl} />
-          <form   onChange={this.handleUserInfoChange}  onSubmit={this.handleSubmit}
+          <ImageUploader
+            userId={uid}
+            avatarUrl={avatarUrl}
+            setAvatarUrl={this.setAvatarUrl}
+          />
+          <form
+            onChange={this.handleUserInfoChange}
+            onSubmit={this.handleSubmit}
             className="user-personal-info"
           >
             <div>
-            <FormGroup className="input-field" controlId='displayName'>
+            <FormGroup
+              className="input-field"
+              controlId='displayName'
+            >
               <ControlLabel>Name</ControlLabel>
               <FormControl
                 type="text"
@@ -103,7 +115,10 @@ class Profile extends React.Component {
                 value={displayName}
               />
             </FormGroup>
-            <FormGroup className="input-field" controlId='email'>
+            <FormGroup
+              className="input-field"
+              controlId='email'
+            >
               <ControlLabel>Email</ControlLabel>
               <FormControl
                 type="text"
@@ -112,7 +127,12 @@ class Profile extends React.Component {
               />
             </FormGroup>
             </div>
-            <Button primary type="submit">Save</Button>
+            <Button
+              primary
+              type="submit"
+            >
+                Save
+            </Button>
           </form>
         </div>
       </div>
@@ -123,7 +143,7 @@ class Profile extends React.Component {
 
     // Make sure the user is loaded, otherwise show a spinner
     if (this.state.user.info) {
-      const { uid, info: { displayName, email }, posts } = this.state.user
+      const { info: { displayName, email, uid }, posts } = this.state.user
       const avatarUrl = this.state.user.info.avatarUrl || this.state.user.info.avatar_url
 
       return (
@@ -132,7 +152,7 @@ class Profile extends React.Component {
               {
                 this.state.editing ?
                   this.renderUserHeader(displayName, email, avatarUrl) :
-                  this.renderUserHeaderEditable(displayName, email, avatarUrl)
+                  this.renderUserHeaderEditable(displayName, email, avatarUrl, uid)
               }
           </section>
           <Button onClick={() => deleteUser(uid, Object.values(posts))} style={{background: '#A91912', color: 'white'}}>Delete Account and Posts</Button>

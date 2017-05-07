@@ -1,14 +1,16 @@
-@import './styles/_profile.scss';
+@import './styles/variables';
+@import './styles/colors';
+@import './styles/profile';
 
 body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
-  background-color: #F2F2F2;
+  background-color: $grey-2;
 }
 
 .navbar {
-  background: linear-gradient(150deg, rgb(10, 32, 45), rgb(1, 95, 130));
+  background: linear-gradient(150deg, $primary, $secondary);
 }
 
 .navbar-default .navbar-brand {
@@ -20,7 +22,7 @@ body {
 }
 
 .listing-avatar {
-  border-radius: 1rem;
+  border-radius: $borderRadius;
   width: 50px;
   height: 50px;
 }
@@ -35,45 +37,25 @@ body {
 
 .login input {
   height: 4rem;
-  border-radius: 2px;
+  border-radius: $borderRadius;
 }
 
 .login h1 {
   margin: 0;
   padding: 2rem;
   color: white;
-  background: linear-gradient(150deg, rgb(1, 95, 130), rgb(10, 32, 45));
+  background: linear-gradient(150deg, $primary, $secondary);
   margin-bottom: 2rem;
   margin-left: -4rem;
   margin-right: -4rem;
   margin-top: -4rem;
   padding-left: 4rem;
-  background-size: 200% 200%;
-  -webkit-animation: gradientSwell 4s ease infinite;
-  -moz-animation: gradientSwell 4s ease infinite;
-  animation: gradientSwell 4s ease infinite;
-}
-
-@-webkit-keyframes gradientSwell {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@-moz-keyframes gradientSwell {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@keyframes gradientSwell {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
 }
 
 .moonlight-request {
   //border-color: #484848;
   //border-width: 2px;
-  //border-radius: 2px;
+  //border-radius: $borderRadius;
   //border-style: solid;
 }
 
@@ -129,17 +111,16 @@ body {
 .uil-ring-css {
   position: relative;
   display: block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  box-shadow: 0 3px 0 0 #444444;
   animation: uil-ring-anim 0.5s linear infinite;
+  margin: auto;
 }
 
-.spinner {
-  width: 100vw;
-  height: 40vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.image-upload-submit-button {
+  min-width: 10em;
+
+  .uil-ring-css {
+    margin: auto;
+    top: 0.1em;
+  }
+
 }
