@@ -2,7 +2,7 @@ import React from 'react';
 import belle from 'belle';
 import _ from 'lodash';
 import ImageUploader from '../ImageUploader';
-import { Row, Col, FormGroup, ControlLabel, FormControl, Radio } from 'react-bootstrap';
+import { Row, Col, FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
 import { getAllUserData } from '../../helpers/userActions';
 import { deleteUser } from '../../helpers/auth';
 import { saveUserData } from '../../helpers/userActions';
@@ -45,6 +45,7 @@ class Profile extends React.Component {
 
   handleUserInfoChange = (e) => {
     const user = mergeUserInfo(this.state.user, e);
+    console.log(user.info);
     this.setState({ user })
   }
 
@@ -147,7 +148,7 @@ class Profile extends React.Component {
           </Row>
           <Row>
             <section className="user-detail">
-              <form>
+              <form onChange={this.handleUserInfoChange}>
                 <Row className="your-info">
                   <Col xs={10}>
                     <h2>Your Information</h2>
@@ -228,18 +229,16 @@ class Profile extends React.Component {
                         // value={email}
                       />
                     </FormGroup>
-                    <FormGroup
-                      controlId='preferredContactMethod'
-                    >
+                    <FormGroup>
                       <ControlLabel>Preferred Contact Method</ControlLabel>
-                      <Radio name="preferredContactMethod">
+                      <Checkbox id="preferEmail" name="email">
                         Email
-                      </Radio>
-                      <Radio name="preferredContactMethod">
+                      </Checkbox>
+                      <Checkbox id="preferPhone" name="phone">
                         Phone
-                      </Radio>
+                      </Checkbox>
                     </FormGroup>
-                    <FormGroup controlId="formControlsTextarea">
+                    <FormGroup controlId="aboutYou">
                       <ControlLabel>About you</ControlLabel>
                       <FormControl componentClass="textarea" placeholder="About your practice" />
                     </FormGroup>

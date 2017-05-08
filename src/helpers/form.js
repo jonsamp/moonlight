@@ -17,10 +17,19 @@ export const collectFormValues = (e) => {
 }
 
 export const mergeUserInfo = (state, e) => {
-  const userInfo = {
-    ...state.info,
-    [e.target.id]: e.target.value
-  };
+  let userInfo;
+
+  if (e.target.type === 'checkbox') {
+    userInfo = {
+      ...state.info,
+      [e.target.id]: e.target.checked
+    };
+  } else {
+    userInfo = {
+      ...state.info,
+      [e.target.id]: e.target.value
+    };
+  }
 
   const user = {
     ...state,
