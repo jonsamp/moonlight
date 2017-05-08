@@ -38,6 +38,9 @@
 .profile .user-info .header .fileInput {
   margin: 1em 0; }
 
+.profile .danger-zone {
+  padding: 2em; }
+
 body {
   margin: 0;
   padding: 0;

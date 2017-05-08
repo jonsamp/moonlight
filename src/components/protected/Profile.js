@@ -15,7 +15,8 @@ class Profile extends React.Component {
 
   state = {
     user: {},
-    editing: true
+    editing: true,
+    enableAccountDeletion: true
   }
 
   componentWillMount = () => {
@@ -45,6 +46,14 @@ class Profile extends React.Component {
   handleUserInfoChange = (e) => {
     const user = mergeUserInfo(this.state.user, e);
     this.setState({ user })
+  }
+
+  handleDeleteAccountField = (e) => {
+    if (e.target.value === this.state.user.info.email) {
+      this.setState({ enableAccountDeletion: false })
+    } else {
+      this.setState({ enableAccountDeletion: true })
+    }
   }
 
   renderUserHeader = (displayName, email, avatarUrl) => {
@@ -133,16 +142,39 @@ class Profile extends React.Component {
                   this.renderUserHeaderEditable(displayName, email, avatarUrl, uid)
               }
           </section>
-          <section className="danger-zone">
-            <h2>Delete Account</h2>
-            <p>Delete your account and all of your posts (past and present). This action is irreversible. Tread carefully.</p>
-            <Button
-              onClick={() => deleteUser(uid, Object.values(posts))}
-              style={{background: '#A91912', color: 'white'}}
-            >
-              Delete Account and Posts
-            </Button>
-          </section>
+          <Row>
+            <Col xs={12} sm={10} md={8} lg={6}>
+              <section className="danger-zone">
+                <h2>Danger Zone</h2>
+                <p>Delete your account and all of your posts (past and present). This action is irreversible. To delete your account, type your email address below: <code>{email}</code></p>
+                <form
+                  onChange={this.handleDeleteAccountField}
+                  className="user-personal-info"
+                >
+                  <FormGroup
+                    className="input-field"
+                    controlId='deleteAccount'
+                  >
+                    <ControlLabel>Email</ControlLabel>
+                    <FormControl
+                      type="text"
+                      placeholder={'Email'}
+                    />
+                  </FormGroup>
+                </form>
+                <Button
+                  onClick={() => deleteUser(uid, Object.values(posts))}
+                  style={{
+                    background: '#A91912',
+                    color: 'white'
+                  }}
+                  disabled={this.state.enableAccountDeletion}
+                >
+                  Delete Account and Posts
+                </Button>
+              </section>
+            </Col>
+          </Row>
         </section>
       )
     } else {
