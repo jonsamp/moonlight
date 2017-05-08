@@ -6,6 +6,7 @@ import { Row, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { getAllUserData } from '../../helpers/userActions';
 import { deleteUser } from '../../helpers/auth';
 import { saveUserData } from '../../helpers/userActions';
+import { collectFormValues, mergeUserInfo } from '../../helpers/form';
 import Spinner from '../Spinner';
 
 const Button = belle.Button;
@@ -32,40 +33,17 @@ class Profile extends React.Component {
   }
 
   toggleEditing = () => {
-    const editing = !this.state.editing;
-    this.setState({ editing  })
+    this.setState({ editing: !this.state.editing  })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const formData = Object.values(e.target.elements).reduce((capture, formElement) => {
-      if (formElement.type === 'checkbox' || formElement.type === 'radio') {
-        return {
-          ...capture,
-          [formElement.id]: formElement.checked
-        }
-      } else {
-        return {
-          ...capture,
-          [formElement.id]: formElement.value
-        }
-      }
-    }, {})
-    this.toggleEditing()
-    saveUserData(this.props.user.uid, formData)
+    const formData = collectFormValues(e);
+    saveUserData(this.props.user.uid, formData).then(this.toggleEditing);
   }
 
   handleUserInfoChange = (e) => {
-    const userInfo = {
-      ...this.state.user.info,
-      [e.target.id]: e.target.value
-    }
-
-    const user = {
-      ...this.state.user,
-      info: userInfo
-    }
-
+    const user = mergeUserInfo(this.state.user, e);
     this.setState({ user })
   }
 
@@ -155,7 +133,16 @@ class Profile extends React.Component {
                   this.renderUserHeaderEditable(displayName, email, avatarUrl, uid)
               }
           </section>
-          <Button onClick={() => deleteUser(uid, Object.values(posts))} style={{background: '#A91912', color: 'white'}}>Delete Account and Posts</Button>
+          <section className="danger-zone">
+            <h2>Delete Account</h2>
+            <p>Delete your account and all of your posts (past and present). This action is irreversible. Tread carefully.</p>
+            <Button
+              onClick={() => deleteUser(uid, Object.values(posts))}
+              style={{background: '#A91912', color: 'white'}}
+            >
+              Delete Account and Posts
+            </Button>
+          </section>
         </section>
       )
     } else {

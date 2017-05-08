@@ -27,7 +27,7 @@
   min-width: 20em; }
 
 .profile .user-info .header .picture-name h1 {
-  margin: 0 0 0.25em 0; }
+  margin: 0 0 0.25em; }
 
 .profile .user-info .header .picture-name img {
   margin-right: 1em;

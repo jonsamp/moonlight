@@ -91,12 +91,12 @@ export function uploadAvatar(userId, file) {
 export function saveUserData(userId, userInfo) {
 
   // Get the current data in the db for this user
-  getUser(userId).then((data) => {
+  return getUser(userId).then((data) => {
 
     // Recursively merge the new data with the existing data
     const newUserInfo = _.merge({}, data, userInfo)
 
     // Write the new data
-    db().ref().child(`users/${userId}/info`).set(newUserInfo)
+    return  db().ref().child(`users/${userId}/info`).set(newUserInfo)
   });
 }
