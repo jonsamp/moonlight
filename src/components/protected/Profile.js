@@ -326,7 +326,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={10} md={8} lg={6}>
               <section className="danger-zone">
                 <h2>Danger Zone</h2>
-                <p>Delete your account and all of your posts (past and present). This action is irreversible. To delete your account, type your email address below: <code>{email}</code></p>
+                <p>Delete your account and all of your posts (past and present). This action is irreversible. To delete your account, type your email address below: <br /><code>{email}</code></p>
                 <form
                   onChange={this.handleDeleteAccountField}
                   className="user-personal-info"
