@@ -2,7 +2,7 @@ import React from 'react';
 import belle from 'belle';
 import _ from 'lodash';
 import ImageUploader from '../ImageUploader';
-import { Row, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Row, Col, FormGroup, ControlLabel, FormControl, Radio } from 'react-bootstrap';
 import { getAllUserData } from '../../helpers/userActions';
 import { deleteUser } from '../../helpers/auth';
 import { saveUserData } from '../../helpers/userActions';
@@ -100,6 +100,7 @@ class Profile extends React.Component {
                 type="text"
                 placeholder={'Name'}
                 value={displayName}
+                required
               />
             </FormGroup>
             <FormGroup
@@ -135,13 +136,118 @@ class Profile extends React.Component {
 
       return (
         <section className="profile">
-          <section className="user-info">
+          <Row>
+            <section className="user-info">
               {
                 this.state.editing ?
                   this.renderUserHeader(displayName, email, avatarUrl) :
                   this.renderUserHeaderEditable(displayName, email, avatarUrl, uid)
               }
-          </section>
+            </section>
+          </Row>
+          <Row>
+            <section className="user-detail">
+              <form>
+                <Row className="your-info">
+                  <Col xs={10}>
+                    <h2>Your Information</h2>
+                    <p>Your information is publicly viewable when you make a request.</p>
+                  </Col>
+                  <Col xs={2}>
+                    <Button primary>Edit</Button>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12} md={6}>
+                    <FormGroup
+                      className="input-field"
+                      controlId='practiceLocation'
+                    >
+                      <ControlLabel>City and State of Practice</ControlLabel>
+                      <FormControl
+                        type="text"
+                        placeholder={'Practice location'}
+                        // value={email}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      className="input-field"
+                      controlId='specialty'
+                    >
+                      <ControlLabel>Specialty</ControlLabel>
+                      <FormControl
+                        type="text"
+                        placeholder={'Specialty'}
+                        // value={displayName}
+                        required
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      className="input-field"
+                      controlId='practiceType'
+                    >
+                      <ControlLabel>Practice Type</ControlLabel>
+                      <FormControl
+                        type="text"
+                        placeholder={'Practice Type'}
+                        // value={email}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      className="input-field"
+                      controlId='demographics'
+                    >
+                      <ControlLabel>Demographics</ControlLabel>
+                      <FormControl
+                        type="text"
+                        placeholder={'Demographics'}
+                        // value={email}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col xs={12} md={6}>
+                    <FormGroup
+                      className="input-field"
+                      controlId='website'
+                    >
+                      <ControlLabel>Website</ControlLabel>
+                      <FormControl
+                        type="text"
+                        placeholder={'website'}
+                        // value={email}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      className="input-field"
+                      controlId='phone'
+                    >
+                      <ControlLabel>Phone Number</ControlLabel>
+                      <FormControl
+                        type="text"
+                        placeholder={'Phone Number'}
+                        // value={email}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      controlId='preferredContactMethod'
+                    >
+                      <ControlLabel>Preferred Contact Method</ControlLabel>
+                      <Radio name="preferredContactMethod">
+                        Email
+                      </Radio>
+                      <Radio name="preferredContactMethod">
+                        Phone
+                      </Radio>
+                    </FormGroup>
+                    <FormGroup controlId="formControlsTextarea">
+                      <ControlLabel>About you</ControlLabel>
+                      <FormControl componentClass="textarea" placeholder="About your practice" />
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </form>
+            </section>
+          </Row>
           <Row>
             <Col xs={12} sm={10} md={8} lg={6}>
               <section className="danger-zone">

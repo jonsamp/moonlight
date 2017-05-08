@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Spinner = (props) => {
-  const fill = props.fill || '#444444';
+  const fill = props.fill || '#004A7C';
   const size = props.size || '50px';
   return (
     <div className='uil-ring-css' style={{

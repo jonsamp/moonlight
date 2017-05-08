@@ -1,9 +1,14 @@
 .profile {
-  .user-info {
+
+  .user-info,
+  .user-detail {
     background-color: white;
     padding: 2em;
     border-radius: $borderRadius;
+    margin-bottom: 1em;
+  }
 
+  .user-info {
     .header {
       display: flex;
       justify-content: space-between;
@@ -48,7 +53,17 @@
     }
   }
 
+  .user-detail {
+    .your-info {
+      margin-bottom: 2em;
+    }
+    .form-group {
+      margin-bottom: 2em;
+    }
+  }
+
   .danger-zone {
-    padding: 2em;
+    // padding: 2em;
+    margin-bottom: 4em;
   }
 }
