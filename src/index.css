@@ -40,6 +40,9 @@
 .profile .user-info .header .fileInput {
   margin: 1em 0; }
 
+.profile .user-detail .info-presentation .control-label + p {
+  margin-bottom: 2em; }
+
 .profile .user-detail .your-info {
   margin-bottom: 2em; }
 
@@ -48,6 +51,9 @@
 
 .profile .danger-zone {
   margin-bottom: 4em; }
+
+.placeholder {
+  color: #aeaeae; }
 
 body {
   margin: 0;

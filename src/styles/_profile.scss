@@ -54,6 +54,9 @@
   }
 
   .user-detail {
+    .info-presentation .control-label + p {
+      margin-bottom: 2em;
+    }
     .your-info {
       margin-bottom: 2em;
     }
