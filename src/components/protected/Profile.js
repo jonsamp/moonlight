@@ -179,7 +179,13 @@ class Profile extends React.Component {
                 )
             }
             <ControlLabel>About you</ControlLabel>
-            <p>{this.state.user.info.aboutYou || (<Placeholder />)}</p>
+            <p>{this.state.user.info.aboutYou.split('\n').map((item) => {
+                  return (
+                  <span>
+                    {item}
+                    <br/>
+                  </span>
+                )}) || (<Placeholder />)}</p>
           </Col>
         </Row>
       </section>
@@ -283,7 +289,7 @@ class Profile extends React.Component {
               </FormGroup>
               <FormGroup controlId="aboutYou">
                 <ControlLabel>About you</ControlLabel>
-                <FormControl componentClass="textarea" placeholder="About your practice" value={this.state.user.info.aboutYou} />
+                <FormControl componentClass="textarea" placeholder="About your practice" value={this.state.user.info.aboutYou} rows="8" />
               </FormGroup>
             </Col>
           </Row>
