@@ -179,7 +179,7 @@ class Profile extends React.Component {
                 )
             }
             <ControlLabel>About you</ControlLabel>
-            <p>{this.state.user.info.aboutYou.split('\n').map((item) => {
+            <p>{this.state.user.info.aboutYou && this.state.user.info.aboutYou.split('\n').map((item) => {
                   return (
                   <span>
                     {item}
