@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { Button } from 'belle';
 import Listing from '../Listing';
 import Toolbar from '../Toolbar';
 import { savePost, getAllPosts, getUser } from '../../helpers/userActions';
@@ -96,8 +97,10 @@ export default class Listings extends Component {
   render() {
     return (
       <div>
-        <h1>Requests</h1>
-        <button onClick={this.sendPostToDB}>NEW POST</button>
+        <div className="listings-header">
+          <h1>Requests</h1>
+          <Button primary className="new-request" onClick={this.sendPostToDB}>NEW POST</Button>
+        </div>
         <Toolbar />
         {this.renderListings()}
       </div>
