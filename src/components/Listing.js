@@ -50,12 +50,13 @@ export default class Listings extends React.Component {
 
   renderBody = () => {
     const { requester, details, jobLocation, startDate, endDate, fulfilled } = this.props;
-    const duration = moment.duration(moment(endDate).diff(moment(startDate)));
+    const duration = moment.duration(moment(endDate).diff(moment(startDate))).humanize();
+    console.log(`${startDate}: ${duration}`);
     return (
       <Row className="request-body">
         <Col md={8}>
           <Media.Heading>{requester}</Media.Heading>
-          <p>{`Requesting a doctor for ${duration.days()} days in ${jobLocation}.`}</p>
+          <p>{`Requesting a doctor for ${duration} in ${jobLocation}.`}</p>
           <h5>Details</h5>
           <p>{details}</p>
         </Col>
