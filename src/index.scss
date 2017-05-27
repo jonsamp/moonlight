@@ -127,6 +127,18 @@ body {
   padding: .25em;
 }
 
+.listings-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .25em;
+}
+
+.new-request {
+  margin: .25em;
+  align-self: flex-end;
+  width: 15%;
+}
+
 @keyframes uil-ring-anim {
   0% {
     -ms-transform: rotate(0deg);
