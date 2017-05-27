@@ -1,5 +1,5 @@
-import React from 'react';
-import belle from 'belle';
+import React, { Component } from 'react';
+import belle, { Button } from 'belle';
 import _ from 'lodash';
 import ImageUploader from '../ImageUploader';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
@@ -10,15 +10,13 @@ import { collectFormValues, mergeUserInfo } from '../../helpers/form';
 import Spinner from '../Spinner';
 import Placeholder from '../Placeholder';
 
-const Button = belle.Button;
-
-class Profile extends React.Component {
+class Profile extends Component {
 
   state = {
     user: {},
     editing: false,
     disableAccountDeletion: true,
-    infoEditing: false
+    infoEditing: false,
   }
 
   componentWillMount = () => {
@@ -30,82 +28,80 @@ class Profile extends React.Component {
   }
 
   setAvatarUrl = (url) => {
-    const user = this.state.user
-    user.info.avatarUrl = url
-    this.setState({ user })
+    const user = this.state.user;
+    user.info.avatarUrl = url;
+    this.setState({ user });
   }
 
   toggleEditing = () => {
-    this.setState({ editing: !this.state.editing  })
+    this.setState({ editing: !this.state.editing });
   }
 
   toggleInfoEditing = () => {
-    this.setState({ infoEditing: !this.state.infoEditing})
+    this.setState({ infoEditing: !this.state.infoEditing });
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const formData = collectFormValues(e);
     saveUserData(this.props.user.uid, formData).then(this.toggleEditing);
   }
 
   handleInfoSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const formData = collectFormValues(e);
-    saveUserData(this.props.user.uid, formData).then(this.toggleInfoEditing)
+    saveUserData(this.props.user.uid, formData).then(this.toggleInfoEditing);
   }
 
   handleUserInfoChange = (e) => {
     const user = mergeUserInfo(this.state.user, e);
-    this.setState({ user })
+    this.setState({ user });
   }
 
   handleDeleteAccountField = (e) => {
     if (e.target.value === this.state.user.info.email) {
-      this.setState({ disableAccountDeletion: false })
+      this.setState({ disableAccountDeletion: false });
     } else {
-      this.setState({ disableAccountDeletion: true })
+      this.setState({ disableAccountDeletion: true });
     }
   }
 
-  renderUserHeader = (displayName, email, avatarUrl) => {
-    return (
-      <div className="header">
-        <div className="picture-name">
-          <img src={avatarUrl} alt={`${displayName}'s avatar`} />
-          <div>
-            <h1>{displayName}</h1>
-            <p>{email}</p>
-          </div>
+  renderUserHeader = (displayName, email, avatarUrl) => (
+    <div className="header">
+      <div className="picture-name">
+        <img src={avatarUrl} alt={`${displayName}'s avatar`} />
+        <div>
+          <h1>{displayName}</h1>
+          <p>{email}</p>
         </div>
-        <Button primary
-          className="edit-btn"
-          onClick={this.toggleEditing}
-        >
+      </div>
+      <Button
+        primary
+        className="edit-btn"
+        onClick={this.toggleEditing}
+      >
           Edit&nbsp;Profile
         </Button>
-      </div>
+    </div>
     )
-  }
 
-  renderUserHeaderEditable = (displayName, email, avatarUrl, uid) => {
-    return (
-      <div className="header">
-        <div className="picture-name">
-          <ImageUploader
-            userId={uid}
-            avatarUrl={avatarUrl}
-            setAvatarUrl={this.setAvatarUrl}
-          />
-          <form
-            onChange={this.handleUserInfoChange}
-            onSubmit={this.handleSubmit}
-            className="user-personal-info"
-          >
-            <div>
+  renderUserHeaderEditable = (displayName, email, avatarUrl, uid) => (
+    <div className="header">
+      <div className="picture-name">
+        <ImageUploader
+          userId={uid}
+          avatarUrl={avatarUrl}
+          setAvatarUrl={this.setAvatarUrl}
+        />
+        <form
+          onChange={this.handleUserInfoChange}
+          onSubmit={this.handleSubmit}
+          className="user-personal-info"
+        >
+          <div>
             <FormGroup
               className="input-field"
-              controlId='displayName'
+              controlId="displayName"
             >
               <ControlLabel>Name</ControlLabel>
               <FormControl
@@ -117,7 +113,7 @@ class Profile extends React.Component {
             </FormGroup>
             <FormGroup
               className="input-field"
-              controlId='email'
+              controlId="email"
             >
               <ControlLabel>Email</ControlLabel>
               <FormControl
@@ -126,49 +122,47 @@ class Profile extends React.Component {
                 value={email}
               />
             </FormGroup>
-            </div>
-            <Button
-              primary
-              type="submit"
-            >
+          </div>
+          <Button
+            primary
+            type="submit"
+          >
                 Save
             </Button>
-          </form>
-        </div>
+        </form>
       </div>
+    </div>
     )
-  }
 
-  renderInfoForm = () => {
-    return (
-      <section className="user-detail">
-        <Row className="your-info">
-          <Col xs={10}>
-            <h2>Your Information</h2>
-            <p>Your information is publicly viewable when you make a request.</p>
-          </Col>
-          <Col xs={2}>
-            <Button primary onClick={this.toggleInfoEditing} style={{ float: 'right' }}>Edit&nbsp;Information</Button>
-          </Col>
-        </Row>
-        <Row className="info-presentation">
-          <Col xs={12} md={6}>
-            <ControlLabel>City and State of Practice</ControlLabel>
-            <p>{this.state.user.info.practiceLocation || (<Placeholder />)}</p>
-            <ControlLabel>Specialty</ControlLabel>
-            <p>{this.state.user.info.specialty || (<Placeholder />)}</p>
-            <ControlLabel>Practice Type</ControlLabel>
-            <p>{this.state.user.info.practiceType || (<Placeholder />)}</p>
-            <ControlLabel>Demographics</ControlLabel>
-            <p>{this.state.user.info.demographics || (<Placeholder />)}</p>
-          </Col>
-          <Col xs={12} md={6}>
-            <ControlLabel>Website</ControlLabel>
-            <p>{this.state.user.info.website || (<Placeholder />)}</p>
-            <ControlLabel>Phone Number</ControlLabel>
-            <p>{this.state.user.info.phoneNumber || (<Placeholder />)}</p>
-            <ControlLabel>Preferred Contact Method</ControlLabel>
-            {
+  renderInfoForm = () => (
+    <section className="user-detail">
+      <Row className="your-info">
+        <Col xs={10}>
+          <h2>Your Information</h2>
+          <p>Your information is publicly viewable when you make a request.</p>
+        </Col>
+        <Col xs={2}>
+          <Button primary onClick={this.toggleInfoEditing} style={{ float: 'right' }}>Edit&nbsp;Information</Button>
+        </Col>
+      </Row>
+      <Row className="info-presentation">
+        <Col xs={12} md={6}>
+          <ControlLabel>City and State of Practice</ControlLabel>
+          <p>{this.state.user.info.practiceLocation || (<Placeholder />)}</p>
+          <ControlLabel>Specialty</ControlLabel>
+          <p>{this.state.user.info.specialty || (<Placeholder />)}</p>
+          <ControlLabel>Practice Type</ControlLabel>
+          <p>{this.state.user.info.practiceType || (<Placeholder />)}</p>
+          <ControlLabel>Demographics</ControlLabel>
+          <p>{this.state.user.info.demographics || (<Placeholder />)}</p>
+        </Col>
+        <Col xs={12} md={6}>
+          <ControlLabel>Website</ControlLabel>
+          <p>{this.state.user.info.website || (<Placeholder />)}</p>
+          <ControlLabel>Phone Number</ControlLabel>
+          <p>{this.state.user.info.phoneNumber || (<Placeholder />)}</p>
+          <ControlLabel>Preferred Contact Method</ControlLabel>
+          {
               !this.state.user.info.preferEmail && !this.state.user.info.preferPhone ?
                 (<Placeholder text="None" />) :
                 (
@@ -178,128 +172,123 @@ class Profile extends React.Component {
                   </p>
                 )
             }
-            <ControlLabel>About you</ControlLabel>
-            <p>{this.state.user.info.aboutYou && this.state.user.info.aboutYou.split('\n').map((item) => {
-                  return (
-                  <span>
-                    {item}
-                    <br/>
-                  </span>
-                )}) || (<Placeholder />)}</p>
+          <ControlLabel>About you</ControlLabel>
+          <p>{this.state.user.info.aboutYou && this.state.user.info.aboutYou.split('\n').map((item) => (
+            <span>
+              {item}
+              <br />
+            </span>
+                )) || (<Placeholder />)}</p>
+        </Col>
+      </Row>
+    </section>
+    )
+
+  renderInfoFormEditable = () => (
+    <section className="user-detail">
+      <form
+        onChange={this.handleUserInfoChange}
+        onSubmit={this.handleInfoSubmit}
+      >
+        <Row className="your-info">
+          <Col xs={10}>
+            <h2>Your Information</h2>
+            <p>Your information is publicly viewable when you make a request.</p>
+          </Col>
+          <Col xs={2}>
+            <Button primary type="submit" style={{ float: 'right' }}>Save</Button>
           </Col>
         </Row>
-      </section>
-    )
-  }
-
-  renderInfoFormEditable = () => {
-    return (
-      <section className="user-detail">
-        <form
-          onChange={this.handleUserInfoChange}
-          onSubmit={this.handleInfoSubmit}
-        >
-          <Row className="your-info">
-            <Col xs={10}>
-              <h2>Your Information</h2>
-              <p>Your information is publicly viewable when you make a request.</p>
-            </Col>
-            <Col xs={2}>
-              <Button primary type="submit" style={{ float: 'right' }}>Save</Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} md={6}>
-              <FormGroup
-                className="input-field"
-                controlId='practiceLocation'
-              >
-                <ControlLabel>City and State of Practice</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder={'Practice location'}
-                  value={this.state.user.info.practiceLocation}
-                />
-              </FormGroup>
-              <FormGroup
-                className="input-field"
-                controlId='specialty'
-              >
-                <ControlLabel>Specialty</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder={'Specialty'}
-                  value={this.state.user.info.specialty}
-                />
-              </FormGroup>
-              <FormGroup
-                className="input-field"
-                controlId='practiceType'
-              >
-                <ControlLabel>Practice Type</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder={'Practice Type'}
-                  value={this.state.user.info.practiceType}
-                />
-              </FormGroup>
-              <FormGroup
-                className="input-field"
-                controlId='demographics'
-              >
-                <ControlLabel>Demographics</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder={'Demographics'}
-                  value={this.state.user.info.demographics}
-                />
-              </FormGroup>
-            </Col>
-            <Col xs={12} md={6}>
-              <FormGroup
-                className="input-field"
-                controlId='website'
-              >
-                <ControlLabel>Website</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder={'website'}
-                  value={this.state.user.info.website}
-                />
-              </FormGroup>
-              <FormGroup
-                className="input-field"
-                controlId="phoneNumber"
-              >
-                <ControlLabel>Phone Number</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder={'Phone Number'}
-                  value={this.state.user.info.phoneNumber}
-                />
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Preferred Contact Method</ControlLabel>
-                <Checkbox id="preferEmail" name="email" checked={this.state.user.info.preferEmail}>
+        <Row>
+          <Col xs={12} md={6}>
+            <FormGroup
+              className="input-field"
+              controlId="practiceLocation"
+            >
+              <ControlLabel>City and State of Practice</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder={'Practice location'}
+                value={this.state.user.info.practiceLocation}
+              />
+            </FormGroup>
+            <FormGroup
+              className="input-field"
+              controlId="specialty"
+            >
+              <ControlLabel>Specialty</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder={'Specialty'}
+                value={this.state.user.info.specialty}
+              />
+            </FormGroup>
+            <FormGroup
+              className="input-field"
+              controlId="practiceType"
+            >
+              <ControlLabel>Practice Type</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder={'Practice Type'}
+                value={this.state.user.info.practiceType}
+              />
+            </FormGroup>
+            <FormGroup
+              className="input-field"
+              controlId="demographics"
+            >
+              <ControlLabel>Demographics</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder={'Demographics'}
+                value={this.state.user.info.demographics}
+              />
+            </FormGroup>
+          </Col>
+          <Col xs={12} md={6}>
+            <FormGroup
+              className="input-field"
+              controlId="website"
+            >
+              <ControlLabel>Website</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder={'website'}
+                value={this.state.user.info.website}
+              />
+            </FormGroup>
+            <FormGroup
+              className="input-field"
+              controlId="phoneNumber"
+            >
+              <ControlLabel>Phone Number</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder={'Phone Number'}
+                value={this.state.user.info.phoneNumber}
+              />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Preferred Contact Method</ControlLabel>
+              <Checkbox id="preferEmail" name="email" checked={this.state.user.info.preferEmail}>
                   Email
                 </Checkbox>
-                <Checkbox id="preferPhone" name="phone" checked={this.state.user.info.preferPhone}>
+              <Checkbox id="preferPhone" name="phone" checked={this.state.user.info.preferPhone}>
                   Phone
                 </Checkbox>
-              </FormGroup>
-              <FormGroup controlId="aboutYou">
-                <ControlLabel>About you</ControlLabel>
-                <FormControl componentClass="textarea" placeholder="About your practice" value={this.state.user.info.aboutYou} rows="8" />
-              </FormGroup>
-            </Col>
-          </Row>
-        </form>
-      </section>
+            </FormGroup>
+            <FormGroup controlId="aboutYou">
+              <ControlLabel>About you</ControlLabel>
+              <FormControl componentClass="textarea" placeholder="About your practice" value={this.state.user.info.aboutYou} rows="8" />
+            </FormGroup>
+          </Col>
+        </Row>
+      </form>
+    </section>
     )
-  }
 
   render() {
-
     belle.style.button.disabledStyle = _.extend(belle.style.button.disabledStyle, {
       color: 'rgb(208, 208, 208)',
       background: '#808080',
@@ -307,8 +296,8 @@ class Profile extends React.Component {
 
     // Make sure the user is loaded, otherwise show a spinner
     if (this.state.user.info) {
-      const { info: { displayName, email, uid }, posts } = this.state.user
-      const avatarUrl = this.state.user.info.avatarUrl || this.state.user.info.avatar_url
+      const { info: { displayName, email, uid }, posts } = this.state.user;
+      const avatarUrl = this.state.user.info.avatarUrl || this.state.user.info.avatar_url;
 
       return (
         <section className="profile">
@@ -339,7 +328,7 @@ class Profile extends React.Component {
                 >
                   <FormGroup
                     className="input-field"
-                    controlId='deleteAccount'
+                    controlId="deleteAccount"
                   >
                     <ControlLabel>Email</ControlLabel>
                     <FormControl
@@ -352,7 +341,7 @@ class Profile extends React.Component {
                   onClick={() => deleteUser(uid, Object.values(posts))}
                   style={{
                     background: '#A91912',
-                    color: 'white'
+                    color: 'white',
                   }}
                   disabled={this.state.disableAccountDeletion}
                 >
@@ -362,12 +351,11 @@ class Profile extends React.Component {
             </Col>
           </Row>
         </section>
-      )
-    } else {
-      return (
-        <Spinner />
-      )
+      );
     }
+    return (
+      <Spinner />
+    );
   }
 }
 

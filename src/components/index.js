@@ -6,6 +6,7 @@ import Register from './Register';
 import Home from './Home';
 import Listings from './protected/Listings';
 import Profile from './protected/Profile';
+import NewListing from './protected/NewListing';
 import { logout } from '../helpers/auth';
 import { firebaseAuth } from '../config/constants';
 import Logo from '../images/logo.svg';
@@ -46,13 +47,13 @@ export default class App extends Component {
         this.setState({
           authed: true,
           loading: false,
-          user
+          user,
         });
       } else {
         this.setState({
           authed: false,
           loading: false,
-          user: {}
+          user: {},
         });
       }
     });
@@ -71,35 +72,30 @@ export default class App extends Component {
       <BrowserRouter>
         <div>
           <nav className="navbar navbar-default navbar-static-top">
-            <div className="container">
-              <div className="navbar-header">
-                <Link to="/" className="navbar-brand">
-                  <img src={Logo} style={{ height: '25px'}}/>
-                </Link>
-              </div>
-              <ul className="nav navbar-nav pull-right">
-                <li>
-                  <Link to="/listings" className="navbar-brand">Listings</Link>
-                </li>
-                <li>
-                  <Link to="/profile" className="navbar-brand">Profile</Link>
-                </li>
-                <li>
-                  {this.state.authed
+            <div className="navbar-header">
+              <Link to="/" className="navbar-brand">
+                <img src={Logo} style={{ height: '25px' }} />
+              </Link>
+            </div>
+            <ul className="nav navbar-nav pull-right">
+              <li>
+                <Link to="/listings" className="navbar-brand nav-link">Listings</Link>
+              </li>
+              <li>
+                <Link to="/profile" className="navbar-brand nav-link">Profile</Link>
+              </li>
+              <li>
+                {this.state.authed
                     ? <button
-                      style={{ border: 'none', background: 'transparent' }}
-                      onClick={() => {
-                        logout();
-                      }}
-                      className="navbar-brand"
+                      onClick={logout}
+                      className="navbar-brand nav-link"
                     >Logout</button>
                     : <span>
-                      <Link to="/login" className="navbar-brand">Login</Link>
-                      <Link to="/register" className="navbar-brand">Register</Link>
+                      <Link to="/login" className="navbar-brand nav-link">Login</Link>
+                      <Link to="/register" className="navbar-brand nav-link">Register</Link>
                     </span>}
-                </li>
-              </ul>
-            </div>
+              </li>
+            </ul>
           </nav>
           <div className="container">
             <div className="row">
@@ -107,8 +103,9 @@ export default class App extends Component {
                 <Route path="/" exact component={Home} />
                 <PublicRoute authed={this.state.authed} path="/login" component={Login} />
                 <PublicRoute authed={this.state.authed} path="/register" component={Register} />
-                <PrivateRoute authed={this.state.authed} path="/listings" component={() => (<Listings {...this.state} />)} />
+                <PrivateRoute exact authed={this.state.authed} path="/listings" component={() => (<Listings {...this.state} />)} />
                 <PrivateRoute authed={this.state.authed} path="/profile" component={() => (<Profile {...this.state} />)} />
+                <PrivateRoute authed={this.state.authed} path="/listings/new" component={() => (<NewListing {...this.state} />)} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

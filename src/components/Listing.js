@@ -1,11 +1,8 @@
 import React from 'react';
-import belle from 'belle';
+import moment from 'moment';
+import { Card, Button } from 'belle';
 import { Row, Media, Col, Glyphicon } from 'react-bootstrap';
-
 import { deletePost, fulfillRequest, getUser } from '../helpers/userActions';
-
-const Card = belle.Card;
-const Button = belle.Button;
 
 export default class Listings extends React.Component {
   constructor(props) {
@@ -52,17 +49,19 @@ export default class Listings extends React.Component {
   }
 
   renderBody = () => {
-    const { requester, details, jobLocation, duration, fulfilled } = this.props;
+    const { requester, details, jobLocation, startDate, endDate, fulfilled } = this.props;
+    const duration = moment.duration(moment(endDate).diff(moment(startDate)));
     return (
       <Row className="request-body">
         <Col md={8}>
           <Media.Heading>{requester}</Media.Heading>
-          <p>{`Requesting a doctor for ${duration} in ${jobLocation}`}</p>
+          <p>{`Requesting a doctor for ${duration.days()} days in ${jobLocation}.`}</p>
+          <h5>Details</h5>
           <p>{details}</p>
         </Col>
         <Col md={4}>
-          <h5><Glyphicon glyph="time" /> {'Dates'}</h5>
-          <p>{duration}</p>
+          <h5><Glyphicon glyph="time" /> Dates</h5>
+          <p>{moment(startDate).format('MM/DD/YY')} to {moment(endDate).format('MM/DD/YY')}</p>
           <h5><Glyphicon glyph="map-marker" /> {'Location'}</h5>
           <p>{jobLocation}</p>
         </Col>

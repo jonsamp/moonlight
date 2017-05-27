@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { Button } from 'belle';
+import { Link } from 'react-router-dom';
 import Listing from '../Listing';
 import Toolbar from '../Toolbar';
-import { savePost, getAllPosts, getUser } from '../../helpers/userActions';
-
-// Random lady names for card distinction before we have a form.
-const names = [
-  'Beth',
-  'Peggy',
-  'Lillian',
-  'Olivia',
-  'Hildegard',
-  'Mary',
-  'Rosie'
-];
+import { getAllPosts, getUser } from '../../helpers/userActions';
 
 export default class Listings extends Component {
 
@@ -37,18 +28,16 @@ export default class Listings extends Component {
   }
 
   // When a post is saved, add it to state
-  addSinglePostToList = (postData) => {
-    const updatedList = this.state.listings.concat(postData);
-    this.setState({
-      listings: updatedList,
-    });
-  }
+  // addSinglePostToList = (postData) => {
+  //   const updatedList = this.state.listings.concat(postData);
+  //   this.setState({
+  //     listings: updatedList,
+  //   });
+  // }
 
   // When a post is deleted, cleave it from the herd
   deleteSinglePostFromList = (postId) => {
-    const updatedList = this.state.listings.filter((item) => {
-      return item.id !== postId;
-    });
+    const updatedList = this.state.listings.filter((item) => item.id !== postId);
     this.setState({
       listings: updatedList,
     });
@@ -67,38 +56,24 @@ export default class Listings extends Component {
     });
   }
 
-  // placeholder to create sample requests
-  sendPostToDB = () => {
-    return savePost(this.props.user, {
-      requester: names[Math.floor(Math.random() * (names.length - 1))],
-      requesterId: this.props.user.uid,
-      jobLocation: 'Salina, KS',
-      duration: '4 days',
-      details: "I'll be out of the office for 4 days on vacation. I have about 20 patients but on average only 3 contact me a day - should be pretty laid back.",
-      fulfilled: false
-    }).then((postData) => {
-      this.addSinglePostToList(postData);
-    });
-  }
-
-  renderListings = () => {
-    return this.state.listings.map((listing) => {
-      return (
-        <Listing
-          deleteSinglePostFromList={this.deleteSinglePostFromList} toggleFulfilled={this.toggleFulfilled}
-          key={`listing-${listing.id}`}
-          {...listing}
-        />
-      );
-    });
-  }
+  renderListings = () => this.state.listings.map((listing) => (
+    <Listing
+      deleteSinglePostFromList={this.deleteSinglePostFromList} toggleFulfilled={this.toggleFulfilled}
+      key={`listing-${listing.id}`}
+      {...listing}
+    />
+      ))
 
   render() {
     return (
       <div>
-        <h1>Requests</h1>
-        <button onClick={this.sendPostToDB}>NEW POST</button>
-        <Toolbar />
+        <div className="listings-title">
+          <h1>Requests</h1>
+          <Link to="/listings/new">
+            <Button primary>Create Request</Button>
+          </Link>
+        </div>
+        {/* <Toolbar /> */}
         {this.renderListings()}
       </div>
     );

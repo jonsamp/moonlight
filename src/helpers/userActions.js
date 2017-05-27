@@ -2,19 +2,14 @@ import _ from 'lodash';
 import { db, storageRef } from '../config/constants';
 
 export function getAllPosts() {
-
   // Retrieve all the posts at once
-  return db().ref('posts').once('value').then((snapshot) => {
-      return Object.values(snapshot.val()).map((item) => item);
-  }, (errorObject) => {
-
+  return db().ref('posts').once('value').then((snapshot) => Object.values(snapshot.val()).map((item) => item), (errorObject) => {
     // TODO: return an error to the front end so we can display an issue to the user
     console.error(`The read failed: ${errorObject.code}`);
   });
 }
 
 export function savePost(user, postData) {
-
   // Get a new unique key to assign everything the same firebase key
   const newPostKey = db().ref().child('posts').push().key;
 
@@ -36,7 +31,6 @@ export function savePost(user, postData) {
 }
 
 export function deletePost(userId, postId) {
-
   // Collects updates
   const updates = {};
 
@@ -49,7 +43,6 @@ export function deletePost(userId, postId) {
 }
 
 export function fulfillRequest(userId, postId, fullFill = true) {
-
   // Collects updates
   const updates = {};
 
@@ -63,15 +56,11 @@ export function fulfillRequest(userId, postId, fullFill = true) {
 
 
 export function getUser(userId) {
-  return db().ref(`users/${userId}/info`).once('value').then((snapshot) => {
-    return snapshot.val();
-  });
+  return db().ref(`users/${userId}/info`).once('value').then((snapshot) => snapshot.val());
 }
 
 export function getAllUserData(userId) {
-  return db().ref(`users/${userId}`).once('value').then((snapshot) => {
-    return snapshot.val();
-  });
+  return db().ref(`users/${userId}`).once('value').then((snapshot) => snapshot.val());
 }
 
 function setAvatar(userId, avatarUrl) {
@@ -89,14 +78,12 @@ export function uploadAvatar(userId, file) {
 }
 
 export function saveUserData(userId, userInfo) {
-
   // Get the current data in the db for this user
   return getUser(userId).then((data) => {
-
     // Recursively merge the new data with the existing data
-    const newUserInfo = _.merge({}, data, userInfo)
+    const newUserInfo = _.merge({}, data, userInfo);
 
     // Write the new data
-    return  db().ref().child(`users/${userId}/info`).set(newUserInfo)
+    return db().ref().child(`users/${userId}/info`).set(newUserInfo);
   });
 }
