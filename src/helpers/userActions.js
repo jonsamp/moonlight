@@ -9,6 +9,10 @@ export function getAllPosts() {
   });
 }
 
+export function getPost(postId) {
+  return db().ref(`users/${userId}/info`).once('value').then((snapshot) => snapshot.val());
+}
+
 export function savePost(user, postData) {
   // Get a new unique key to assign everything the same firebase key
   const newPostKey = db().ref().child('posts').push().key;

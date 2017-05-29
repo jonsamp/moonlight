@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Listing from '../Listing';
 import Toolbar from '../Toolbar';
 import { getAllPosts, getUser } from '../../helpers/userActions';
+import ListingModal from '../ListingModal';
 
 export default class Listings extends Component {
 
@@ -13,6 +14,7 @@ export default class Listings extends Component {
     shown: 26, // this is how many listings are shown at one time - defaulting to 25
     beginningListingId: null, // this and the ending listing id might be useful when querying firebase for more while lazy loading
     endingListingId: null,
+    isModalOpen: false,
   }
 
   componentDidMount = () => {
@@ -56,6 +58,14 @@ export default class Listings extends Component {
     });
   }
 
+  openModal = () => {
+    this.setState({ isModalOpen: true });
+  }
+
+  closeModal = () => {
+    this.setState({ isModalOpen: false });
+  }
+
   renderListings = () => this.state.listings.map((listing) => (
     <Listing
       deleteSinglePostFromList={this.deleteSinglePostFromList} toggleFulfilled={this.toggleFulfilled}
@@ -75,6 +85,7 @@ export default class Listings extends Component {
         </div>
         {/* <Toolbar /> */}
         {this.renderListings()}
+        <ListingModal show={this.state.isModalOpen} onHide={closeModal} />
       </div>
     );
   }

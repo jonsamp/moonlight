@@ -19,10 +19,6 @@ export default class Listings extends React.Component {
     });
   }
 
-  openModal = () => {
-    console.log('open-modal clicked on id:', this.props.id);
-  }
-
   deleteRequest = () => {
     const { requesterId, id } = this.props;
     deletePost(requesterId, id).then(() => {
