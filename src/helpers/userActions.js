@@ -10,7 +10,7 @@ export function getAllPosts() {
 }
 
 export function getPost(postId) {
-  return db().ref(`users/${userId}/info`).once('value').then((snapshot) => snapshot.val());
+  return db().ref(`posts/${postId}`).once('value').then((snapshot) => snapshot.val());
 }
 
 export function savePost(user, postData) {

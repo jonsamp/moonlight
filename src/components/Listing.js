@@ -10,7 +10,7 @@ export default class Listings extends React.Component {
     this.state = {
       avatarUrl: `https://avatar.tobi.sh/${this.props.requesterId}`,
     };
-    this.openModal = this.openModal.bind(this.props.id);
+    // this.openModal = this.props.openModal.bind(this.props.id);
   }
 
   componentDidMount = () => {
@@ -20,14 +20,14 @@ export default class Listings extends React.Component {
   }
 
   deleteRequest = () => {
-    const { requesterId, id } = this.props;
+    const { requesterId, id, ...rest } = this.props;
     deletePost(requesterId, id).then(() => {
       this.props.deleteSinglePostFromList(id);
     });
   }
 
   fullfillRequest = () => {
-    const { requesterId, id } = this.props;
+    const { requesterId, id, ...rest } = this.props;
     fulfillRequest(requesterId, id).then(() => {
       this.props.toggleFulfilled(id);
     });
@@ -39,7 +39,7 @@ export default class Listings extends React.Component {
       <Row className="request-action-group">
         <Button className="request-action" onClick={this.deleteRequest}>Delete</Button>
         <Button className="request-action" onClick={this.fullfillRequest}>{ fulfilled ? 'Fulfilled!!!' : 'Fulfill' }</Button>
-        <Button className="request-action" primary onClick={this.openModal}>View</Button>
+        <Button className="request-action" primary onClick={this.props.openModal.bind(this, this.props.id)}>View</Button>
       </Row>
     );
   }

@@ -4,25 +4,40 @@ import { Card, Button } from 'belle';
 import { Row, Media, Col, Glyphicon, Modal } from 'react-bootstrap';
 import { deletePost, fulfillRequest, getUser } from '../helpers/userActions';
 
-const ListingModal = (props) => (
-  <Modal {...props} bsSize="large" aria-labelledby="contained-modal-title-lg">
-    <Modal.Header closeButton>
-      <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <h4>Wrapped Text</h4>
-      <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-      <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-      <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-      <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-      <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-      <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button onClick={this.props.onHide}>Close</Button>
-    </Modal.Footer>
-  </Modal>
-    );
+const ListingModal = (props) => {
+  const { listing, show, onHide } = props;
+  const { requester, details, jobLocation, startDate, endDate, fulfilled } = listing;
+  const duration = moment.duration(moment(endDate).diff(moment(startDate))).humanize();
+  console.log('listing:', listing)
+
+  return (
+    <Modal show={show} onHide={onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-lg">{listing.requester}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Wrapped Text</h4>
+          <Row className="request-body">
+            <Col md={8}>
+              <Media.Heading>{requester}</Media.Heading>
+              <p>{`Requesting a doctor for ${duration} in ${jobLocation}.`}</p>
+              <h5>Details</h5>
+              <p>{details}</p>
+            </Col>
+            <Col md={4}>
+              <h5><Glyphicon glyph="time" /> Dates</h5>
+              <p>{moment(startDate).format('MM/DD/YY')} to {moment(endDate).format('MM/DD/YY')}</p>
+              <h5><Glyphicon glyph="map-marker" /> {'Location'}</h5>
+              <p>{jobLocation}</p>
+            </Col>
+
+          </Row>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  )
+};
+
+export default ListingModal;

@@ -4,7 +4,7 @@ import { Button } from 'belle';
 import { Link } from 'react-router-dom';
 import Listing from '../Listing';
 import Toolbar from '../Toolbar';
-import { getAllPosts, getUser } from '../../helpers/userActions';
+import { getAllPosts, getUser, getPost } from '../../helpers/userActions';
 import ListingModal from '../ListingModal';
 
 export default class Listings extends Component {
@@ -15,6 +15,7 @@ export default class Listings extends Component {
     beginningListingId: null, // this and the ending listing id might be useful when querying firebase for more while lazy loading
     endingListingId: null,
     isModalOpen: false,
+    modalListing: {},
   }
 
   componentDidMount = () => {
@@ -58,8 +59,12 @@ export default class Listings extends Component {
     });
   }
 
-  openModal = () => {
-    this.setState({ isModalOpen: true });
+  openModal = (listingId) => {
+    console.log('openModal clicked:', listingId);
+    const modalListing = this.state.listings.find((listing) => (
+      listing.id === listingId
+    ));
+    this.setState({ isModalOpen: true, modalListing });
   }
 
   closeModal = () => {
@@ -68,7 +73,9 @@ export default class Listings extends Component {
 
   renderListings = () => this.state.listings.map((listing) => (
     <Listing
-      deleteSinglePostFromList={this.deleteSinglePostFromList} toggleFulfilled={this.toggleFulfilled}
+      deleteSinglePostFromList={this.deleteSinglePostFromList}
+      toggleFulfilled={this.toggleFulfilled}
+      openModal={this.openModal}
       key={`listing-${listing.id}`}
       {...listing}
     />
@@ -85,7 +92,7 @@ export default class Listings extends Component {
         </div>
         {/* <Toolbar /> */}
         {this.renderListings()}
-        <ListingModal show={this.state.isModalOpen} onHide={closeModal} />
+        <ListingModal show={this.state.isModalOpen} onHide={this.closeModal} listing={this.state.modalListing} />
       </div>
     );
   }
