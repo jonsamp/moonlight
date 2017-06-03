@@ -32,9 +32,7 @@ const SpinnerIcon = (props) => (
 );
 
 const Spinner = ({ size, fill }) => (
-  <div className="spinner-container">
-    <SpinnerIcon className="spinner" fill={fill} height={size} width={size} />
-  </div>
+  <SpinnerIcon className="spinner" fill={fill} height={size} width={size} />
 );
 
 Spinner.defaultProps = {

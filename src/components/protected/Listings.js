@@ -4,7 +4,7 @@ import { Button } from 'belle';
 import { Link } from 'react-router-dom';
 import Listing from '../Listing';
 import Toolbar from '../Toolbar';
-import { getAllPosts, getUser, getPost } from '../../helpers/userActions';
+import { getAllPosts } from '../../helpers/userActions';
 import ListingModal from '../ListingModal';
 
 export default class Listings extends Component {
@@ -30,14 +30,6 @@ export default class Listings extends Component {
     });
   }
 
-  // When a post is saved, add it to state
-  // addSinglePostToList = (postData) => {
-  //   const updatedList = this.state.listings.concat(postData);
-  //   this.setState({
-  //     listings: updatedList,
-  //   });
-  // }
-
   // When a post is deleted, cleave it from the herd
   deleteSinglePostFromList = (postId) => {
     const updatedList = this.state.listings.filter((item) => item.id !== postId);
@@ -59,11 +51,8 @@ export default class Listings extends Component {
     });
   }
 
-  openModal = (listingId) => {
-    console.log('openModal clicked:', listingId);
-    const modalListing = this.state.listings.find((listing) => (
-      listing.id === listingId
-    ));
+  openModal = (listing, user) => {
+    const modalListing = _.merge({}, listing, user);
     this.setState({ isModalOpen: true, modalListing });
   }
 
@@ -79,7 +68,7 @@ export default class Listings extends Component {
       key={`listing-${listing.id}`}
       {...listing}
     />
-      ))
+  ))
 
   render() {
     return (

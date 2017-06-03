@@ -1,9 +1,7 @@
 import React from 'react';
 
-const Placeholder = (props) => {
-  return (
-    <p className="placeholder">{props.text || 'Not Available'}</p>
+const Placeholder = (props) => (
+  <span className="placeholder">{props.text || 'Not Available'}</span>
   );
-};
 
 export default Placeholder;

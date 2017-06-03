@@ -173,6 +173,30 @@ textarea.form-control {
   .listing .request-action {
     width: 33.3%; } }
 
+.listing-modal .user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.listing-modal .user-info .display-name {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-top: 1rem; }
+
+.listing-modal .user-info .summary {
+  font-size: 1.25rem;
+  margin-bottom: 2rem; }
+
+.listing-modal .title {
+  font-weight: 900;
+  margin-top: 1.25rem; }
+
+.listing-modal .detail-group {
+  padding: 1rem 2rem; }
+
+.listing-modal .detail-group.greyed {
+  background-color: #F6F7F8; }
+
 .new-listing {
   background-color: white;
   border: 1px solid #E4E8EC;
@@ -189,6 +213,11 @@ body {
   font-family: 'Lato', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
   background-color: #F6F7F8;
   font-size: 16px; }
+
+.avatar {
+  border-radius: 2px;
+  width: 5rem;
+  height: 5rem; }
 
 .listings-title {
   display: flex;

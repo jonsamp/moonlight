@@ -3,19 +3,21 @@ import moment from 'moment';
 import { Card, Button } from 'belle';
 import { Row, Media, Col, Glyphicon } from 'react-bootstrap';
 import { deletePost, fulfillRequest, getUser } from '../helpers/userActions';
+import { respectLineBreaks } from '../helpers/utils.js';
 
 export default class Listings extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      avatarUrl: `https://avatar.tobi.sh/${this.props.requesterId}`,
-    };
-    // this.openModal = this.props.openModal.bind(this.props.id);
+
+  state = {
+    avatarUrl: `https://avatar.tobi.sh/${this.props.requesterId}`,
+    user: {},
   }
 
   componentDidMount = () => {
     getUser(this.props.requesterId).then((user) => {
-      this.setState({ avatarUrl: user.avatarUrl || user.avatar_url });
+      this.setState({
+        avatarUrl: user.avatarUrl || user.avatar_url,
+        user,
+      });
     });
   }
 
@@ -39,7 +41,7 @@ export default class Listings extends React.Component {
       <Row className="request-action-group">
         <Button className="request-action" onClick={this.deleteRequest}>Delete</Button>
         <Button className="request-action" onClick={this.fullfillRequest}>{ fulfilled ? 'Fulfilled!!!' : 'Fulfill' }</Button>
-        <Button className="request-action" primary onClick={this.props.openModal.bind(this, this.props.id)}>View</Button>
+        <Button className="request-action" primary onClick={() => this.props.openModal(this.props, this.state.user)}>View</Button>
       </Row>
     );
   }
@@ -47,14 +49,13 @@ export default class Listings extends React.Component {
   renderBody = () => {
     const { requester, details, jobLocation, startDate, endDate, fulfilled } = this.props;
     const duration = moment.duration(moment(endDate).diff(moment(startDate))).humanize();
-    console.log(`${startDate}: ${duration}`);
     return (
       <Row className="request-body">
         <Col md={8}>
-          <Media.Heading className="requester">{requester}</Media.Heading>
+          <Media.Heading className="requester">{this.state.user.displayName}</Media.Heading>
           <p className="listing-summary">{`Requesting for ${duration} in ${jobLocation}.`}</p>
           <h4 className="title">Details</h4>
-          <p>{details}</p>
+          <p>{respectLineBreaks(details)}</p>
         </Col>
         <Col md={4}>
           <h4 className="title"><Glyphicon glyph="time" /> Dates</h4>
@@ -81,7 +82,6 @@ export default class Listings extends React.Component {
           </Media.Body>
         </Media>
       </Card>
-
     );
   }
 }
