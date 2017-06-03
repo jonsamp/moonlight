@@ -1,0 +1,48 @@
+.listing {
+
+  .request-body {
+    padding: 0 1rem;
+  }
+
+  .request-action-group {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .request-action {
+    min-width: 10rem;
+    margin-left: 0.5rem;
+  }
+
+  .listing-avatar {
+    border-radius: $borderRadius;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .requester {
+    font-weight: 900;
+    font-size: 1.5rem;
+  }
+
+  .listing-summary {
+    font-size: 1.25rem;
+  }
+
+  .title {
+    font-weight: 900;
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 770px) {
+
+    .request-action-group {
+      padding: 0 1rem;
+    }
+    .request-action {
+      width: 33.3%;
+    }
+  }
+}

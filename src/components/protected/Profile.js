@@ -289,11 +289,6 @@ class Profile extends Component {
     )
 
   render() {
-    belle.style.button.disabledStyle = _.extend(belle.style.button.disabledStyle, {
-      color: 'rgb(208, 208, 208)',
-      background: '#808080',
-    });
-
     // Make sure the user is loaded, otherwise show a spinner
     if (this.state.user.info) {
       const { info: { displayName, email, uid }, posts } = this.state.user;
@@ -354,7 +349,7 @@ class Profile extends Component {
       );
     }
     return (
-      <Spinner />
+      <Spinner size="4rem" />
     );
   }
 }

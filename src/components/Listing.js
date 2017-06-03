@@ -51,15 +51,15 @@ export default class Listings extends React.Component {
     return (
       <Row className="request-body">
         <Col md={8}>
-          <Media.Heading>{requester}</Media.Heading>
-          <p>{`Requesting a doctor for ${duration} in ${jobLocation}.`}</p>
-          <h5>Details</h5>
+          <Media.Heading className="requester">{requester}</Media.Heading>
+          <p className="listing-summary">{`Requesting a doctor for ${duration} in ${jobLocation}.`}</p>
+          <h4 className="title">Details</h4>
           <p>{details}</p>
         </Col>
         <Col md={4}>
-          <h5><Glyphicon glyph="time" /> Dates</h5>
+          <h4 className="title"><Glyphicon glyph="time" /> Dates</h4>
           <p>{moment(startDate).format('MM/DD/YY')} to {moment(endDate).format('MM/DD/YY')}</p>
-          <h5><Glyphicon glyph="map-marker" /> {'Location'}</h5>
+          <h4 className="title"><Glyphicon glyph="map-marker" /> {'Location'}</h4>
           <p>{jobLocation}</p>
         </Col>
 
@@ -71,8 +71,8 @@ export default class Listings extends React.Component {
     const { requester, details, jobLocation, duration, fulfilled } = this.props;
     return (
       <Card>
-        <Media className="moonlight-request">
-          <Media.Left className="request-identity">
+        <Media className="listing">
+          <Media.Left>
             <img className="listing-avatar" src={this.state.avatarUrl} alt={`${requester} avatar`} />
           </Media.Left>
           <Media.Body>

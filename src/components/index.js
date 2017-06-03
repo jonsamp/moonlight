@@ -12,6 +12,8 @@ import { firebaseAuth } from '../config/constants';
 import Logo from '../images/logo.svg';
 import Spinner from './Spinner';
 
+require('../config/belleStyles');
+
 function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
     <Route
