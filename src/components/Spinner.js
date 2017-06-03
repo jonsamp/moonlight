@@ -32,8 +32,10 @@ const SpinnerIcon = (props) => (
 );
 
 const Spinner = ({ size, fill }) => (
-  <SpinnerIcon className="spinner" fill={fill} height={size} width={size} />
-  );
+  <div className="spinner-container">
+    <SpinnerIcon className="spinner" fill={fill} height={size} width={size} />
+  </div>
+);
 
 Spinner.defaultProps = {
   size: '16px',
@@ -41,22 +43,3 @@ Spinner.defaultProps = {
 };
 
 export default Spinner;
-
-// const Spinner = (props) => {
-//   const fill = props.fill || '#004A7C';
-//   const size = props.size || '50px';
-//   return (
-//     <div
-//       className="uil-ring-css" style={{
-//         boxShadow: `0 3px 0 0 ${fill}`,
-//         height: size,
-//         width: size,
-//         borderRadius: size,
-//       }}
-//     >
-//       <div />
-//     </div>
-//   );
-// };
-//
-// export default Spinner;

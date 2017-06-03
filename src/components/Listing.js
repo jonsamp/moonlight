@@ -52,7 +52,7 @@ export default class Listings extends React.Component {
       <Row className="request-body">
         <Col md={8}>
           <Media.Heading className="requester">{requester}</Media.Heading>
-          <p className="listing-summary">{`Requesting a doctor for ${duration} in ${jobLocation}.`}</p>
+          <p className="listing-summary">{`Requesting for ${duration} in ${jobLocation}.`}</p>
           <h4 className="title">Details</h4>
           <p>{details}</p>
         </Col>

@@ -9,7 +9,7 @@ import Profile from './protected/Profile';
 import NewListing from './protected/NewListing';
 import { logout } from '../helpers/auth';
 import { firebaseAuth } from '../config/constants';
-import Logo from '../images/logo.svg';
+import Logo from '../images/moon.svg';
 import Spinner from './Spinner';
 
 require('../config/belleStyles');
@@ -70,33 +70,66 @@ export default class App extends Component {
   }
 
   render() {
-    return this.state.loading === true ? <Spinner /> : (
+    return this.state.loading ? <Spinner size="5rem" className="spinner-position" /> : (
       <BrowserRouter>
         <div>
           <nav className="navbar navbar-default navbar-static-top">
             <div className="navbar-header">
               <Link to="/" className="navbar-brand">
-                <img src={Logo} style={{ height: '25px' }} />
+                <img
+                  src={Logo} style={{
+                    height: '16px',
+                    display: 'inline-block',
+                    marginRight: '0.25rem',
+                    position: 'relative',
+                    top: '-0.1rem',
+                  }}
+                /> moonlight dpc
               </Link>
             </div>
-            <ul className="nav navbar-nav pull-right">
-              <li>
-                <Link to="/listings" className="navbar-brand nav-link">Listings</Link>
-              </li>
-              <li>
-                <Link to="/profile" className="navbar-brand nav-link">Profile</Link>
-              </li>
-              <li>
-                {this.state.authed
-                    ? <button
-                      onClick={logout}
-                      className="navbar-brand nav-link"
-                    >Logout</button>
-                    : <span>
-                      <Link to="/login" className="navbar-brand nav-link">Login</Link>
-                      <Link to="/register" className="navbar-brand nav-link">Register</Link>
-                    </span>}
-              </li>
+            <ul className="nav">
+              {this.state.authed ?
+                <li>
+                  <Link to="/listings" className="nav-link">
+                    <button className="nav-button">
+                      Listings
+                  </button>
+                  </Link>
+                </li> : null
+              }
+              {this.state.authed ?
+                <li>
+                  <Link to="/profile" className="nav-link">
+                    <button className="nav-button">
+                        Profile
+                    </button>
+                  </Link>
+                </li> : null
+              }
+              {this.state.authed ?
+                <li>
+                  <button className="nav-button" onClick={logout}>
+                    Logout
+                  </button>
+                </li> :
+                <li>
+                  <Link to="/login" className="nav-link">
+                    <button className="nav-button">
+                        Login
+                    </button>
+                  </Link>
+                </li>
+              }
+              {this.state.authed ?
+                null :
+                <li>
+                  <Link to="/register" className="nav-link">
+                    <button className="nav-button">
+                      Register
+                  </button>
+                  </Link>
+                </li>
+              }
             </ul>
           </nav>
           <div className="container">

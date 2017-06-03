@@ -71,21 +71,21 @@ export default class Login extends Component {
             </section>
             <hr />
             <form onSubmit={this.handleSubmit}>
-              <h5>Login with email</h5>
-              <h6>Don't have an account? <Link to="/register">Register</Link></h6>
+              <p>Login with email</p>
+              <h5>Don't have an account? <Link to="/register">Register</Link></h5>
               <div className="form-group">
-                <input className="form-control" ref={(email) => this.email = email} placeholder="Email"/>
+                <input className="form-control" ref={(email) => this.email = email} placeholder="Email" />
               </div>
               <div className="form-group">
-                <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw}/>
+                <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw} />
               </div>
               {this.state.loginMessage && <div className="alert alert-danger" role="alert">
-                <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true" />
                 <span className="sr-only">Error:</span>
                 &nbsp;{this.state.loginMessage}
                 <a href="#" onClick={this.resetPassword} className="alert-link"> Forgot Password?</a>
               </div>}
-              <Button type="submit" primary style={{ width: "100%" }}>Login</Button>
+              <Button type="submit" primary style={{ width: '100%' }}>Login</Button>
             </form>
           </Card>
         </Col>

@@ -1,0 +1,40 @@
+.navbar {
+  background-color: $secondary;
+  overflow: hidden;
+}
+
+.navbar-default .navbar-brand {
+  color: $grey-2;
+
+  &:hover {
+    color: $grey-2;
+  }
+}
+
+.nav-link {
+  padding: 0 !important;
+}
+
+.nav-button {
+  border: none;
+  background-color: $tertiary;
+  color: white;
+  height: 3.25rem;
+  padding: 0 2.5rem;
+  outline: none;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  font-size: 0.9rem;
+
+  &:hover {
+    background-color: lighten($tertiary, 10%);
+    transition: background-color 0.15s;
+  }
+}
+
+ul.nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
