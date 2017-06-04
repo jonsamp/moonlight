@@ -16,6 +16,7 @@ export default class Listings extends Component {
     endingListingId: null,
     isModalOpen: false,
     modalListing: {},
+    currentUserId: this.props.user.uid,
   }
 
   componentDidMount = () => {
@@ -39,10 +40,9 @@ export default class Listings extends Component {
   }
 
   toggleFulfilled = (postId) => {
-    const updatedList = this.state.listings.map((item) => {
-      const listing = item;
-      if (item.id === postId) {
-        listing.fulfilled = true;
+    const updatedList = this.state.listings.map((listing) => {
+      if (listing.id === postId) {
+        listing.fulfilled = !listing.fulfilled;
       }
       return listing;
     });
@@ -60,15 +60,26 @@ export default class Listings extends Component {
     this.setState({ isModalOpen: false });
   }
 
-  renderListings = () => this.state.listings.map((listing) => (
-    <Listing
-      deleteSinglePostFromList={this.deleteSinglePostFromList}
-      toggleFulfilled={this.toggleFulfilled}
-      openModal={this.openModal}
-      key={`listing-${listing.id}`}
-      {...listing}
-    />
-  ))
+  renderListings = () => this.sortListingsByDate().map((listing) => {
+    const listingStartDate = (new Date(listing.startDate)).getTime();
+    const today = (new Date()).getTime();
+    const oneDayInMilliseconds = 86400000;
+
+    if (listingStartDate > (today - oneDayInMilliseconds)) {
+      return (
+        <Listing
+          deleteSinglePostFromList={this.deleteSinglePostFromList}
+          toggleFulfilled={this.toggleFulfilled}
+          openModal={this.openModal}
+          key={`listing-${listing.id}`}
+          currentUserId={this.state.currentUserId}
+          {...listing}
+        />
+      );
+    }
+  })
+
+  sortListingsByDate = () => this.state.listings.sort((a, b) => (new Date(a.startDate)).getTime() - (new Date(b.startDate)).getTime())
 
   render() {
     return (

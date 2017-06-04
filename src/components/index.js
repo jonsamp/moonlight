@@ -92,7 +92,7 @@ export default class App extends Component {
                 <li>
                   <Link to="/listings" className="nav-link">
                     <button className="nav-button">
-                      Listings
+                      Requests
                   </button>
                   </Link>
                 </li> : null

@@ -167,6 +167,14 @@ textarea.form-control {
   font-weight: 900;
   margin-top: 1.25rem; }
 
+.listing .fullfilled-request {
+  display: inline-block;
+  padding: 0.25rem 0.8rem;
+  background-color: #00C39A;
+  color: white;
+  border-radius: 2px;
+  margin: 0.25rem 0; }
+
 @media (max-width: 770px) {
   .listing .request-action-group {
     padding: 0 1rem; }

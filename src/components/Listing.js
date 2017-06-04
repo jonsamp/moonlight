@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import moment from 'moment';
 import { Card, Button } from 'belle';
 import { Row, Media, Col, Glyphicon } from 'react-bootstrap';
 import { deletePost, fulfillRequest, getUser } from '../helpers/userActions';
 import { respectLineBreaks } from '../helpers/utils.js';
 
-export default class Listings extends React.Component {
+export default class Listings extends Component {
 
   state = {
     avatarUrl: `https://avatar.tobi.sh/${this.props.requesterId}`,
@@ -28,19 +28,31 @@ export default class Listings extends React.Component {
     });
   }
 
-  fullfillRequest = () => {
+  fulfillRequest = () => {
     const { requesterId, id, ...rest } = this.props;
-    fulfillRequest(requesterId, id).then(() => {
+    fulfillRequest(requesterId, id, !rest.fulfilled).then(() => {
       this.props.toggleFulfilled(id);
     });
   }
-  // this renderButtons needs to consider if the user is the owner or not - we might need to maintain a list of "owned listings" for each
-  // user for this reason. This keeps the logic on the firebase side - we could do something simpler for now though
-  renderButtons(fulfilled) {
+
+  renderButtons() {
+    // Compare the listing owner to the current user. If the same, display the delete and fulfill buttons
+    const { fulfilled, requesterId, currentUserId } = this.props;
+
     return (
       <Row className="request-action-group">
-        <Button className="request-action" onClick={this.deleteRequest}>Delete</Button>
-        <Button className="request-action" onClick={this.fullfillRequest}>{ fulfilled ? 'Fulfilled!!!' : 'Fulfill' }</Button>
+        {
+          currentUserId === requesterId ?
+            <div>
+              <Button className="request-action" onClick={this.deleteRequest}><Glyphicon glyph="trash" /> Delete</Button>
+              <Button className="request-action" onClick={this.fulfillRequest}>
+                {fulfilled ?
+                  <span><Glyphicon glyph="check" /> Request Fulfilled</span> :
+                  <span><Glyphicon glyph="unchecked" /> Fulfill Request</span>
+                }
+              </Button>
+            </div> : null
+        }
         <Button className="request-action" primary onClick={() => this.props.openModal(this.props, this.state.user)}>View</Button>
       </Row>
     );
@@ -48,11 +60,21 @@ export default class Listings extends React.Component {
 
   renderBody = () => {
     const { requester, details, jobLocation, startDate, endDate, fulfilled } = this.props;
-    const duration = moment.duration(moment(endDate).diff(moment(startDate))).humanize();
+    let duration = moment.duration(moment(endDate).diff(moment(startDate))).humanize();
+
+    if (duration === 'a few seconds') {
+      duration = 'a day';
+    }
+
     return (
       <Row className="request-body">
         <Col md={8}>
           <Media.Heading className="requester">{this.state.user.displayName}</Media.Heading>
+          {fulfilled ?
+            <div className="fullfilled-request">
+              <Glyphicon glyph="check" /> Request Fullfilled
+            </div> : null
+          }
           <p className="listing-summary">{`Requesting for ${duration} in ${jobLocation}.`}</p>
           <h4 className="title">Details</h4>
           <p>{respectLineBreaks(details)}</p>
@@ -69,7 +91,7 @@ export default class Listings extends React.Component {
   }
 
   render() {
-    const { requester, details, jobLocation, duration, fulfilled } = this.props;
+    const { requester, details, jobLocation, duration } = this.props;
     return (
       <Card>
         <Media className="listing">

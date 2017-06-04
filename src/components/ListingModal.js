@@ -6,7 +6,6 @@ import Placeholder from './Placeholder';
 import { respectLineBreaks } from '../helpers/utils.js';
 
 const ListingModal = (props) => {
-  console.log(respectLineBreaks);
   const { listing, show, onHide } = props;
   const {
     avatarUrl,
