@@ -132,16 +132,16 @@ export default class App extends Component {
               }
             </ul>
           </nav>
+          <Route path="/" exact component={Home} />
           <div className="container">
             <div className="row">
               <Switch>
-                <Route path="/" exact component={Home} />
+
                 <PublicRoute authed={this.state.authed} path="/login" component={Login} />
                 <PublicRoute authed={this.state.authed} path="/register" component={Register} />
                 <PrivateRoute exact authed={this.state.authed} path="/listings" component={() => (<Listings {...this.state} />)} />
                 <PrivateRoute authed={this.state.authed} path="/profile" component={() => (<Profile {...this.state} />)} />
                 <PrivateRoute authed={this.state.authed} path="/listings/new" component={() => (<NewListing {...this.state} />)} />
-                <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>
           </div>

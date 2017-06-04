@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,900");
 .navbar {
   background-color: #152843;
-  overflow: hidden; }
+  overflow: hidden;
+  border: none; }
 
 .navbar-default .navbar-brand {
   color: #F6F7F8; }
@@ -221,6 +222,35 @@ body {
   font-family: 'Lato', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
   background-color: #F6F7F8;
   font-size: 16px; }
+
+.home-banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1464262509267-2b90beb4cffc?dpr=2&auto=format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=&bg=") center center no-repeat;
+  height: calc(100vh - 2.5rem);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: -2rem; }
+
+.home-banner .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-top: -20vh; }
+
+.home-banner .main .home-logo {
+  width: 3.5rem; }
+
+.home-banner .main p {
+  margin-bottom: 2rem; }
+
+.home-banner .main h1 {
+  font-size: 5rem;
+  margin-bottom: 1.25rem; }
 
 .avatar {
   border-radius: 2px;
