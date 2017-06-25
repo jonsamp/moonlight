@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "moonlight-dpc"
+    "default": "moonlight-dpc",
+    "staging": "moonlight-f5246",
+    "prod": "moonlight-dpc"
   }
 }
