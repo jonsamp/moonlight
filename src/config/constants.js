@@ -7,7 +7,19 @@ const config = {
   storageBucket: 'gs://moonlight-dpc.appspot.com',
 };
 
-firebase.initializeApp(config);
+const devConfig = {
+  apiKey: ' AIzaSyB293UVoldkZWzzh4kz3yO7LR0hv_yplSs',
+  authDomain: 'moonlight-f5246.firebaseapp.com',
+  databaseURL: 'https://moonlight-f5246.firebaseio.com/',
+  storageBucket: 'gs://moonlight-f5246.appspot.com',
+};
+
+let enviro;
+if (process.env.NODE_ENV === 'production' && process.env.REACT_APP_ENV === 'production') {
+  enviro = config;
+} else { enviro = devConfig; }
+
+firebase.initializeApp(enviro);
 
 export const ref = firebase.database().ref();
 export const db = firebase.database;
