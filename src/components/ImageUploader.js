@@ -48,7 +48,7 @@ class ImageUploader extends Component {
     const { imagePreviewUrl } = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} />);
+      $imagePreview = <div className="avatar"><img src={imagePreviewUrl} /></div>;
     } else {
       $imagePreview = null;
     }
@@ -57,7 +57,7 @@ class ImageUploader extends Component {
       <div className="previewComponent">
         <div className="imgPreview">
           <p>Please select a profile image.</p>
-          {$imagePreview || (<img src={this.props.avatarUrl} />)}
+          {$imagePreview || <div className="avatar"><img src={this.props.avatarUrl} /></div>}
 
         </div>
         <form onSubmit={(e) => this._handleSubmit(e)}>

@@ -69,7 +69,9 @@ class Profile extends Component {
   renderUserHeader = (displayName, email, avatarUrl) => (
     <div className="header">
       <div className="picture-name">
-        <img src={avatarUrl} alt={`${displayName}'s avatar`} />
+        <div className="avatar">
+          <img src={avatarUrl} alt={`${displayName}'s avatar`} />
+        </div>
         <div>
           <h1>{displayName}</h1>
           <p>{email}</p>
@@ -162,23 +164,29 @@ class Profile extends Component {
           <ControlLabel>Phone Number</ControlLabel>
           <p>{this.state.user.info.phoneNumber || (<Placeholder />)}</p>
           <ControlLabel>Preferred Contact Method</ControlLabel>
-          {
+          <p>
+            {
               !this.state.user.info.preferEmail && !this.state.user.info.preferPhone ?
-                (<Placeholder text="None" />) :
+                <Placeholder text="None" /> :
                 (
-                  <p>
+                  <div>
                     <p>{this.state.user.info.preferEmail && '✓ Email'}</p>
                     <p>{this.state.user.info.preferPhone && '✓ Phone'}</p>
-                  </p>
+                  </div>
                 )
-            }
+              }
+          </p>
           <ControlLabel>About you</ControlLabel>
-          <p>{this.state.user.info.aboutYou && this.state.user.info.aboutYou.split('\n').map((item) => (
-            <span>
-              {item}
-              <br />
-            </span>
-                )) || (<Placeholder />)}</p>
+          <p>{this.state.user.info.aboutYou ?
+              this.state.user.info.aboutYou.split('\n').map((item) => (
+                <span>
+                  {item}
+                  <br />
+                </span>
+              )) :
+              <Placeholder />
+            }
+          </p>
         </Col>
       </Row>
     </section>

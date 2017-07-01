@@ -108,6 +108,10 @@ body {
   border-radius: $borderRadius;
   width: 5rem;
   height: 5rem;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
 }
 
 .listings-title {

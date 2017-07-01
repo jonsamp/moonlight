@@ -37,6 +37,10 @@
     border-radius: $borderRadius;
     width: 5rem;
     height: 5rem;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
   }
 
   .requester {
@@ -51,6 +55,10 @@
   .title {
     font-weight: 900;
     margin-top: 1.25rem;
+
+    .glyph {
+      margin-right: 0.25rem;
+    }
   }
 
   .fullfilled-request {

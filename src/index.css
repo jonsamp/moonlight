@@ -72,11 +72,8 @@ ul.nav {
 .profile .user-info .header .picture-name h1 {
   margin: 0 0 0.25em; }
 
-.profile .user-info .header .picture-name img {
-  margin-right: 2em;
-  width: 100px;
-  height: 100px;
-  border-radius: 2px; }
+.profile .user-info .header .picture-name .avatar {
+  margin-right: 2em; }
 
 .profile .user-info .header .fileInput {
   margin: 1em 0; }
@@ -173,7 +170,11 @@ textarea.form-control {
 .listing .listing-avatar {
   border-radius: 2px;
   width: 5rem;
-  height: 5rem; }
+  height: 5rem;
+  overflow: hidden; }
+
+.listing .listing-avatar img {
+  width: 100%; }
 
 .listing .requester {
   font-weight: 900;
@@ -185,6 +186,9 @@ textarea.form-control {
 .listing .title {
   font-weight: 900;
   margin-top: 1.25rem; }
+
+.listing .title .glyph {
+  margin-right: 0.25rem; }
 
 .listing .fullfilled-request {
   display: inline-block;
@@ -312,7 +316,11 @@ body {
 .avatar {
   border-radius: 2px;
   width: 5rem;
-  height: 5rem; }
+  height: 5rem;
+  overflow: hidden; }
+
+.avatar img {
+  width: 100%; }
 
 .listings-title {
   display: flex;

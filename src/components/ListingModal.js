@@ -9,7 +9,6 @@ const ListingModal = (props) => {
   const { listing, show, onHide } = props;
   const {
     avatarUrl,
-    avatar_url,
     aboutYou,
     displayName,
     details,
@@ -24,9 +23,10 @@ const ListingModal = (props) => {
     practiceType,
     specialty,
     website,
+    inPersonCoverage,
+    remoteCoverage,
   } = listing;
   const duration = moment.duration(moment(endDate).diff(moment(startDate))).humanize();
-
 
   return (
     <Modal show={show} onHide={onHide} bsSize="large" aria-labelledby="contained-modal-title-lg" className="listing-modal">
@@ -34,9 +34,27 @@ const ListingModal = (props) => {
       <Modal.Body>
         <Row>
           <Col xs={12} className="user-info">
-            <img src={avatarUrl || avatar_url} className="avatar" />
+            <div className="avatar">
+              <img src={avatarUrl} />
+            </div>
             <Media.Heading className="display-name">{displayName}</Media.Heading>
             <p className="summary">{`Requesting a doctor for ${duration} in ${jobLocation}.`}</p>
+          </Col>
+        </Row>
+        <Row className="detail-group">
+          <Col xs={6} style={{ marginBottom: '2rem' }}>
+            <h5 className="title">
+              Preferred Contact Method
+            </h5>
+            {preferPhone ?
+              <p>Phone: {phoneNumber || <Placeholder />}</p> :
+              null
+            }
+            {preferEmail ?
+              <p>Email: {email || <Placeholder />}</p> :
+              null
+            }
+            {!preferEmail && !preferPhone ? <Placeholder /> : null}
           </Col>
         </Row>
         <Row className="detail-group greyed">
@@ -54,25 +72,21 @@ const ListingModal = (props) => {
           </Col>
           <Col xs={6}>
             <h5 className="title">
-              <Glyphicon glyph="map-marker" /> {'Location'}
+              <Glyphicon glyph="map-marker" /> Location
             </h5>
             <p>{jobLocation}</p>
           </Col>
         </Row>
-        <Row className="detail-group">
-          <Col xs={6}>
+        <Row className="detail-group greyed">
+          <Col xs={12}>
             <h5 className="title">
-              Preferred Contact
+              <Glyphicon glyph="briefcase" /> Coverage Needed
             </h5>
-            {preferPhone ?
-              <p>Phone: {phoneNumber || <Placeholder />}</p> :
-              null
-            }
-            {preferEmail ?
-              <p>Email: {email || <Placeholder />}</p> :
-              null
-            }
+            { inPersonCoverage ? <p>✓ In person coverage</p> : null }
+            { remoteCoverage ? <p>✓ Remote coverage</p> : null }
           </Col>
+        </Row>
+        <Row className="detail-group">
           <Col xs={6}>
             <h5 className="title">
               Specialty

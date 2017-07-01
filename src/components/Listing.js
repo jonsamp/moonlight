@@ -3,7 +3,8 @@ import moment from 'moment';
 import { Card, Button } from 'belle';
 import { Row, Media, Col, Glyphicon } from 'react-bootstrap';
 import { deletePost, fulfillRequest, getUser } from '../helpers/userActions';
-import { respectLineBreaks } from '../helpers/utils.js';
+import { respectLineBreaks } from '../helpers/utils';
+import Placeholder from './Placeholder';
 
 export default class Listings extends Component {
 
@@ -13,6 +14,7 @@ export default class Listings extends Component {
   }
 
   componentDidMount = () => {
+    console.log('REQUSETI', this.props.requesterId);
     getUser(this.props.requesterId).then((user) => {
       this.setState({
         avatarUrl: user.avatarUrl || user.avatar_url,
@@ -37,7 +39,7 @@ export default class Listings extends Component {
 
   renderButtons() {
     // Compare the listing owner to the current user. If the same, display the delete and fulfill buttons
-    const { fulfilled, requesterId, currentUserId } = this.props;
+    const { fulfilled, requesterId, currentUserId, requester } = this.props;
 
     return (
       <Row className="request-action-group">
@@ -53,13 +55,16 @@ export default class Listings extends Component {
               </Button>
             </div> : null
         }
-        <Button className="request-action" primary onClick={() => this.props.openModal(this.props, this.state.user)}>View</Button>
+        {
+          requester !== 'new-listing' ?
+            <Button className="request-action" primary onClick={() => this.props.openModal(this.props, this.state.user)}>View</Button> : null
+        }
       </Row>
     );
   }
 
   renderBody = () => {
-    const { requester, details, jobLocation, startDate, endDate, fulfilled } = this.props;
+    const { details, jobLocation, startDate, endDate, fulfilled, inPersonCoverage, remoteCoverage } = this.props;
     let duration = moment.duration(moment(endDate).diff(moment(startDate))).humanize();
 
     if (duration === 'a few seconds') {
@@ -75,15 +80,19 @@ export default class Listings extends Component {
               <Glyphicon glyph="check" /> Request Fullfilled
             </div> : null
           }
-          <p className="listing-summary">{`Requesting coverage for ${duration} starting on ${moment(startDate).format('MM/DD/YY')}, located at ${jobLocation}.`}</p>
+          <p className="listing-summary">{`Requesting coverage for ${duration} starting on ${moment(startDate).format('MM/DD/YY')}${jobLocation ? `, located at ${jobLocation}` : ''}.`}</p>
           <h4 className="title">Details</h4>
-          <p>{respectLineBreaks(details)}</p>
+          <p>{details ? respectLineBreaks(details) : <Placeholder />}</p>
         </Col>
         <Col md={4}>
-          <h4 className="title"><Glyphicon glyph="time" /> Dates</h4>
+          <h4 className="title"><Glyphicon glyph="time" className="glyph" /> Dates</h4>
           <p>{moment(startDate).format('MM/DD/YY')} to {moment(endDate).format('MM/DD/YY')}</p>
-          <h4 className="title"><Glyphicon glyph="map-marker" /> {'Location'}</h4>
-          <p>{jobLocation}</p>
+          <h4 className="title"><Glyphicon glyph="map-marker" className="glyph" /> Location</h4>
+          <p>{jobLocation || <Placeholder />}</p>
+          <h4 className="title"><Glyphicon glyph="briefcase" className="glyph" /> Coverage</h4>
+          {inPersonCoverage ? <p>✓ In person coverage</p> : null}
+          {remoteCoverage ? <p>✓ Remote coverage</p> : null}
+          {!inPersonCoverage && !remoteCoverage ? <Placeholder /> : null}
         </Col>
 
       </Row>
@@ -96,7 +105,9 @@ export default class Listings extends Component {
       <Card>
         <Media className="listing">
           <Media.Left>
-            <img className="listing-avatar" src={this.state.avatarUrl} alt={`${requester} avatar`} />
+            <div className="listing-avatar">
+              <img src={this.state.avatarUrl} alt={`${requester} avatar`} />
+            </div>
           </Media.Left>
           <Media.Body>
             {this.renderBody()}
