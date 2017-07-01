@@ -26,7 +26,7 @@
   "scripts": {
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build-production": "REACT_APP_ENV=production npm run build-css && react-scripts build",
+    "build-production": "REACT_APP_ENV=production && export REACT_APP_ENV; npm run build-css && react-scripts build",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
