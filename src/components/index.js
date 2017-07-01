@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Glyphicon } from 'react-bootstrap';
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
@@ -90,18 +91,18 @@ export default class App extends Component {
             <ul className="nav">
               {this.state.authed ?
                 <li>
-                  <Link to="/listings" className="nav-link">
+                  <Link to="/listings">
                     <button className="nav-button">
-                      Requests
+                      <Glyphicon glyph="menu-hamburger" /> Requests
                   </button>
                   </Link>
                 </li> : null
               }
               {this.state.authed ?
                 <li>
-                  <Link to="/profile" className="nav-link">
+                  <Link to="/profile">
                     <button className="nav-button">
-                        Profile
+                      <Glyphicon glyph="user" /> Profile
                     </button>
                   </Link>
                 </li> : null
@@ -109,13 +110,13 @@ export default class App extends Component {
               {this.state.authed ?
                 <li>
                   <button className="nav-button" onClick={logout}>
-                    Logout
+                    <Glyphicon glyph="log-out" /> Logout
                   </button>
                 </li> :
                 <li>
-                  <Link to="/login" className="nav-link">
+                  <Link to="/login">
                     <button className="nav-button">
-                        Login
+                      Login
                     </button>
                   </Link>
                 </li>
@@ -123,7 +124,7 @@ export default class App extends Component {
               {this.state.authed ?
                 null :
                 <li>
-                  <Link to="/register" className="nav-link">
+                  <Link to="/register">
                     <button className="nav-button">
                       Register
                   </button>

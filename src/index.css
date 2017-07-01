@@ -10,20 +10,24 @@
 .navbar-default .navbar-brand:hover {
   color: #F6F7F8; }
 
-.nav-link {
-  padding: 0 !important; }
+.nav li {
+  margin: 0.5rem 0.25rem; }
+
+.nav li a {
+  padding: 0;
+  border-radius: 99rem; }
 
 .nav-button {
   border: none;
   background-color: #2f4b6f;
   color: white;
-  height: 3.25rem;
-  padding: 0 2.5rem;
+  padding: 0.5rem 2rem;
+  border-radius: 99rem;
   outline: none;
   width: 100%;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
-  font-size: 0.9rem; }
+  font-size: 0.8rem; }
 
 .nav-button:hover {
   background-color: #3f6492;
