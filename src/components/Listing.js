@@ -75,7 +75,7 @@ export default class Listings extends Component {
               <Glyphicon glyph="check" /> Request Fullfilled
             </div> : null
           }
-          <p className="listing-summary">{`Requesting for ${duration} in ${jobLocation}.`}</p>
+          <p className="listing-summary">{`Requesting coverage for ${duration} starting on ${moment(startDate).format('MM/DD/YY')}, located at ${jobLocation}.`}</p>
           <h4 className="title">Details</h4>
           <p>{respectLineBreaks(details)}</p>
         </Col>

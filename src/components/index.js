@@ -71,7 +71,7 @@ export default class App extends Component {
   }
 
   render() {
-    return this.state.loading ? <Spinner size="5rem" className="spinner-position" /> : (
+    return this.state.loading ? <div className="spinner-position"><Spinner size="5rem" /></div> : (
       <BrowserRouter>
         <div>
           <nav className="navbar navbar-default navbar-static-top">

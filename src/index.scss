@@ -23,6 +23,13 @@ body {
   font-size: 16px;
 }
 
+.spinner-position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .home {
   background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) ), url('https://user-images.githubusercontent.com/6455018/27762439-55f1348e-5e40-11e7-9f31-c74e7c792b8d.jpg') center center no-repeat;
   background-size: cover;

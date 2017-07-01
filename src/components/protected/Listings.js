@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { Button } from 'belle';
 import { Link } from 'react-router-dom';
+import { Glyphicon } from 'react-bootstrap';
 import Listing from '../Listing';
-import Toolbar from '../Toolbar';
 import { getAllPosts } from '../../helpers/userActions';
 import ListingModal from '../ListingModal';
 
@@ -60,26 +60,25 @@ export default class Listings extends Component {
     this.setState({ isModalOpen: false });
   }
 
-  renderListings = () => this.sortListingsByDate().map((listing) => {
+  renderListings = () => this.state.listings.map((listing) => (
+    <Listing
+      deleteSinglePostFromList={this.deleteSinglePostFromList}
+      toggleFulfilled={this.toggleFulfilled}
+      openModal={this.openModal}
+      key={`listing-${listing.id}`}
+      currentUserId={this.state.currentUserId}
+      {...listing}
+    />
+    ));
+
+  filterLapsedListings = (listings) => listings.filter((listing) => {
     const listingStartDate = (new Date(listing.startDate)).getTime();
     const today = (new Date()).getTime();
     const oneDayInMilliseconds = 86400000;
-
-    if (listingStartDate > (today - oneDayInMilliseconds)) {
-      return (
-        <Listing
-          deleteSinglePostFromList={this.deleteSinglePostFromList}
-          toggleFulfilled={this.toggleFulfilled}
-          openModal={this.openModal}
-          key={`listing-${listing.id}`}
-          currentUserId={this.state.currentUserId}
-          {...listing}
-        />
-      );
-    }
+    return listingStartDate > (today - oneDayInMilliseconds);
   })
 
-  sortListingsByDate = () => this.state.listings.sort((a, b) => (new Date(a.startDate)).getTime() - (new Date(b.startDate)).getTime())
+  sortListingsByDate = (listings) => listings.sort((a, b) => (new Date(a.startDate)).getTime() - (new Date(b.startDate)).getTime())
 
   render() {
     return (
@@ -90,8 +89,16 @@ export default class Listings extends Component {
             <Button primary>Create Request</Button>
           </Link>
         </div>
-        {/* <Toolbar /> */}
-        {this.renderListings()}
+        { this.filterLapsedListings(this.sortListingsByDate(this.state.listings)).length ?
+            this.renderListings() :
+            <div className="request-placeholder">
+              <Glyphicon glyph="calendar" className="glyph" />
+              <h3>There are currently no active requests.</h3>
+              <Link to="/listings/new">
+                <Button primary>Create Request</Button>
+              </Link>
+            </div>
+        }
         <ListingModal show={this.state.isModalOpen} onHide={this.closeModal} listing={this.state.modalListing} />
       </div>
     );

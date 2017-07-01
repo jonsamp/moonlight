@@ -60,7 +60,7 @@ const ListingModal = (props) => {
           </Col>
         </Row>
         <Row className="detail-group">
-          <Col xs="6">
+          <Col xs={6}>
             <h5 className="title">
               Preferred Contact
             </h5>
@@ -73,7 +73,7 @@ const ListingModal = (props) => {
               null
             }
           </Col>
-          <Col xs="6">
+          <Col xs={6}>
             <h5 className="title">
               Specialty
             </h5>
@@ -83,13 +83,13 @@ const ListingModal = (props) => {
           </Col>
         </Row>
         <Row className="detail-group">
-          <Col xs="6">
+          <Col xs={6}>
             <h5 className="title">
               Demographics
             </h5>
             {demographics || <Placeholder />}
           </Col>
-          <Col xs="6">
+          <Col xs={6}>
             <h5 className="title">
               Practice Type
             </h5>
@@ -97,13 +97,13 @@ const ListingModal = (props) => {
           </Col>
         </Row>
         <Row className="detail-group">
-          <Col xs="6">
+          <Col xs={6}>
             <h5 className="title">
               About {displayName}
             </h5>
             {respectLineBreaks(aboutYou) || <Placeholder />}
           </Col>
-          <Col xs="6">
+          <Col xs={6}>
             <h5 className="title">
               Website
             </h5>

@@ -143,6 +143,20 @@ ul.nav {
 textarea.form-control {
   padding: 0.5rem 0.8rem; }
 
+.request-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+  margin-top: 15vh; }
+
+.request-placeholder h3 {
+  margin-bottom: 2rem; }
+
+.request-placeholder .glyph {
+  font-size: 4rem; }
+
 .listing .request-body {
   padding: 0 1rem; }
 
@@ -226,6 +240,12 @@ body {
   font-family: 'Lato', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
   background-color: #F6F7F8;
   font-size: 16px; }
+
+.spinner-position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; }
 
 .home {
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("https://user-images.githubusercontent.com/6455018/27762439-55f1348e-5e40-11e7-9f31-c74e7c792b8d.jpg") center center no-repeat;
