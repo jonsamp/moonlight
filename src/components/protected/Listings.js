@@ -81,7 +81,6 @@ export default class Listings extends Component {
   sortListingsByDate = (listings) => listings.sort((a, b) => (new Date(a.startDate)).getTime() - (new Date(b.startDate)).getTime())
 
   render() {
-    console.log(this.state.listings);
     return (
       <div>
         <div className="listings-title">

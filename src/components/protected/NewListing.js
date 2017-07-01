@@ -70,7 +70,6 @@ class NewListing extends Component {
   render() {
     const { user, location, selectedStartDate, selectedEndDate, description, remoteCoverage, inPersonCoverage } = this.state;
 
-    console.log(user);
     return (
       <div>
         <h1>Request Time Off</h1>
