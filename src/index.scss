@@ -23,25 +23,25 @@ body {
   font-size: 16px;
 }
 
-.home-banner {
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.unsplash.com/photo-1464262509267-2b90beb4cffc?dpr=2&auto=format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=&bg=') center center no-repeat;
-  height: calc(100vh - 2.5rem);
+.home {
+  background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) ), url('https://user-images.githubusercontent.com/6455018/27762439-55f1348e-5e40-11e7-9f31-c74e7c792b8d.jpg') center center no-repeat;
+  background-size: cover;
+  height: 80vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
-
   margin-top: -2rem;
 
   .main {
+    max-width: 50rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    margin-top: -20vh;
 
     .home-logo {
       width: 3.5rem;
@@ -55,6 +55,45 @@ body {
       font-size: 5rem;
       margin-bottom: 1.25rem;
     }
+  }
+
+}
+
+.supporting {
+  background-color: $secondary;
+  padding: 2rem 0;
+
+  .section {
+    color: $grey-3;
+    max-width: 50rem;
+    margin: 4rem auto;
+    display: flex;
+    align-items: center;
+
+    h2 {
+      line-height: 2.75rem;
+    }
+
+    .glyph {
+      font-size: 2.5rem;
+      margin-right: 2rem;
+      color: $primary;
+    }
+  }
+}
+
+.cta {
+  background-color: darken($secondary, 10%);
+  padding: 4rem 0;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+
+  h2 {
+    margin-bottom: 2rem;
   }
 }
 

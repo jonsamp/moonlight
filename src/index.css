@@ -6,8 +6,9 @@
 
 .navbar-default .navbar-brand {
   color: #F6F7F8; }
-  .navbar-default .navbar-brand:hover {
-    color: #F6F7F8; }
+
+.navbar-default .navbar-brand:hover {
+  color: #F6F7F8; }
 
 .nav-link {
   padding: 0 !important; }
@@ -23,9 +24,10 @@
   text-transform: uppercase;
   letter-spacing: 0.05rem;
   font-size: 0.9rem; }
-  .nav-button:hover {
-    background-color: #3f6492;
-    transition: background-color 0.15s; }
+
+.nav-button:hover {
+  background-color: #3f6492;
+  transition: background-color 0.15s; }
 
 ul.nav {
   display: flex;
@@ -44,29 +46,36 @@ ul.nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-start; }
-  .profile .user-info .header .edit-btn {
-    width: 10em; }
-  .profile .user-info .header .picture-name {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100%; }
-    .profile .user-info .header .picture-name .user-personal-info {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start; }
-      .profile .user-info .header .picture-name .user-personal-info .input-field {
-        min-width: 20em; }
-    .profile .user-info .header .picture-name h1 {
-      margin: 0 0 0.25em; }
-    .profile .user-info .header .picture-name img {
-      margin-right: 2em;
-      width: 100px;
-      height: 100px;
-      border-radius: 2px; }
-  .profile .user-info .header .fileInput {
-    margin: 1em 0; }
+
+.profile .user-info .header .edit-btn {
+  width: 10em; }
+
+.profile .user-info .header .picture-name {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%; }
+
+.profile .user-info .header .picture-name .user-personal-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; }
+
+.profile .user-info .header .picture-name .user-personal-info .input-field {
+  min-width: 20em; }
+
+.profile .user-info .header .picture-name h1 {
+  margin: 0 0 0.25em; }
+
+.profile .user-info .header .picture-name img {
+  margin-right: 2em;
+  width: 100px;
+  height: 100px;
+  border-radius: 2px; }
+
+.profile .user-info .header .fileInput {
+  margin: 1em 0; }
 
 .profile .user-detail .info-presentation .control-label + p {
   margin-bottom: 2em; }
@@ -177,13 +186,15 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   align-items: center; }
-  .listing-modal .user-info .display-name {
-    font-size: 1.5rem;
-    font-weight: 900;
-    margin-top: 1rem; }
-  .listing-modal .user-info .summary {
-    font-size: 1.25rem;
-    margin-bottom: 2rem; }
+
+.listing-modal .user-info .display-name {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-top: 1rem; }
+
+.listing-modal .user-info .summary {
+  font-size: 1.25rem;
+  margin-bottom: 2rem; }
 
 .listing-modal .title {
   font-weight: 900;
@@ -191,8 +202,9 @@ textarea.form-control {
 
 .listing-modal .detail-group {
   padding: 1rem 2rem; }
-  .listing-modal .detail-group.greyed {
-    background-color: #F6F7F8; }
+
+.listing-modal .detail-group.greyed {
+  background-color: #F6F7F8; }
 
 .new-listing {
   background-color: white;
@@ -211,9 +223,10 @@ body {
   background-color: #F6F7F8;
   font-size: 16px; }
 
-.home-banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1464262509267-2b90beb4cffc?dpr=2&auto=format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=&bg=") center center no-repeat;
-  height: calc(100vh - 2.5rem);
+.home {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("https://user-images.githubusercontent.com/6455018/27762439-55f1348e-5e40-11e7-9f31-c74e7c792b8d.jpg") center center no-repeat;
+  background-size: cover;
+  height: 80vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -221,20 +234,56 @@ body {
   align-items: center;
   color: white;
   margin-top: -2rem; }
-  .home-banner .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    margin-top: -20vh; }
-    .home-banner .main .home-logo {
-      width: 3.5rem; }
-    .home-banner .main p {
-      margin-bottom: 2rem; }
-    .home-banner .main h1 {
-      font-size: 5rem;
-      margin-bottom: 1.25rem; }
+
+.home .main {
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem; }
+
+.home .main .home-logo {
+  width: 3.5rem; }
+
+.home .main p {
+  margin-bottom: 2rem; }
+
+.home .main h1 {
+  font-size: 5rem;
+  margin-bottom: 1.25rem; }
+
+.supporting {
+  background-color: #152843;
+  padding: 2rem 0; }
+
+.supporting .section {
+  color: #E4E8EC;
+  max-width: 50rem;
+  margin: 4rem auto;
+  display: flex;
+  align-items: center; }
+
+.supporting .section h2 {
+  line-height: 2.75rem; }
+
+.supporting .section .glyph {
+  font-size: 2.5rem;
+  margin-right: 2rem;
+  color: #1CA5F2; }
+
+.cta {
+  background-color: #09111c;
+  padding: 4rem 0;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white; }
+
+.cta h2 {
+  margin-bottom: 2rem; }
 
 .avatar {
   border-radius: 2px;
