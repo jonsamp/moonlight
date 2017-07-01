@@ -14,7 +14,6 @@ export default class Listings extends Component {
   }
 
   componentDidMount = () => {
-    console.log('REQUSETI', this.props.requesterId);
     getUser(this.props.requesterId).then((user) => {
       this.setState({
         avatarUrl: user.avatarUrl || user.avatar_url,
