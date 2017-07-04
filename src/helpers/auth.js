@@ -27,12 +27,12 @@ export function saveUser(user, firstName, lastName) {
   }).then(() => user);
 }
 
-export function deleteUser(userId, posts = []) {
+export function deleteUser(userId, posts = {}) {
   // Collects updates
   const updates = {};
 
   // Delete all the user's posts
-  posts.map((post) => {
+  Object.values(posts).map((post) => {
     updates[`/posts/${post.id}`] = null;
   });
 
