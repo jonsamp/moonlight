@@ -40,6 +40,10 @@
   }
 }
 
+.nav-active .nav-button {
+  background-color: lighten($tertiary, 10%);
+}
+
 ul.nav {
   display: flex;
   justify-content: flex-end;

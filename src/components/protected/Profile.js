@@ -366,7 +366,7 @@ class Profile extends Component {
       );
     }
     return (
-      <Spinner size="4rem" />
+      <div className="spinner-position"><Spinner size="5rem" /></div>
     );
   }
 }

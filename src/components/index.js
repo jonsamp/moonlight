@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Glyphicon } from 'react-bootstrap';
-import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Link, NavLink, Redirect, Switch } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Home from './Home';
@@ -91,20 +91,20 @@ export default class App extends Component {
             <ul className="nav">
               {this.state.authed ?
                 <li>
-                  <Link to="/listings">
+                  <NavLink to="/listings" activeClassName="nav-active">
                     <button className="nav-button">
                       <Glyphicon glyph="menu-hamburger" /> Requests
-                  </button>
-                  </Link>
+                    </button>
+                  </NavLink>
                 </li> : null
               }
               {this.state.authed ?
                 <li>
-                  <Link to="/profile">
+                  <NavLink to="/profile" activeClassName="nav-active">
                     <button className="nav-button">
                       <Glyphicon glyph="user" /> Profile
                     </button>
-                  </Link>
+                  </NavLink>
                 </li> : null
               }
               {this.state.authed ?
@@ -137,7 +137,6 @@ export default class App extends Component {
           <div className="container">
             <div className="row">
               <Switch>
-
                 <PublicRoute authed={this.state.authed} path="/login" component={Login} />
                 <PublicRoute authed={this.state.authed} path="/register" component={Register} />
                 <PrivateRoute exact authed={this.state.authed} path="/listings" component={() => (<Listings {...this.state} />)} />

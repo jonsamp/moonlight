@@ -60,17 +60,6 @@ export default class Listings extends Component {
     this.setState({ isModalOpen: false });
   }
 
-  renderListings = () => this.state.listings.map((listing) => (
-    <Listing
-      deleteSinglePostFromList={this.deleteSinglePostFromList}
-      toggleFulfilled={this.toggleFulfilled}
-      openModal={this.openModal}
-      key={`listing-${listing.id}`}
-      currentUserId={this.state.currentUserId}
-      {...listing}
-    />
-    ));
-
   filterLapsedListings = (listings) => listings.filter((listing) => {
     const listingStartDate = (new Date(listing.startDate)).getTime();
     const today = (new Date()).getTime();
@@ -79,6 +68,17 @@ export default class Listings extends Component {
   })
 
   sortListingsByDate = (listings) => listings.sort((a, b) => (new Date(a.startDate)).getTime() - (new Date(b.startDate)).getTime())
+
+  renderListings = () => this.filterLapsedListings(this.state.listings).map((listing) => (
+    <Listing
+      deleteSinglePostFromList={this.deleteSinglePostFromList}
+      toggleFulfilled={this.toggleFulfilled}
+      openModal={this.openModal}
+      key={`listing-${listing.id}`}
+      currentUserId={this.state.currentUserId}
+      {...listing}
+    />
+  ));
 
   render() {
     return (
