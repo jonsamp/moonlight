@@ -74,6 +74,17 @@ export default class App extends Component {
     return this.state.loading ? <div className="spinner-position"><Spinner size="5rem" /></div> : (
       <BrowserRouter>
         <div>
+          {this.state.authed ?
+            <div className="beta-banner">
+              <div>Moonlight DPC is currently in beta. Please help us with your feedback.</div>
+              <a href="mailto:feedback@moonlightdpc.com?subject=Moonlight DPC Feedback">
+                <button className="feedback-button">
+                  Provide Feedback
+                </button>
+              </a>
+            </div> :
+            null
+          }
           <nav className="navbar navbar-default navbar-static-top">
             <div className="navbar-header">
               <Link to="/" className="navbar-brand">

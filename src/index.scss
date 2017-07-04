@@ -30,6 +30,41 @@ body {
   height: 100vh;
 }
 
+.beta-banner {
+  background: lighten($tertiary, 10%);
+  background: repeating-linear-gradient(
+    45deg,
+    #606dbc,
+    #606dbc 10px,
+    #465298 10px,
+    #465298 20px
+  );
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: $grey-1;
+
+  .feedback-button {
+    border: none;
+    border-radius: 99rem;
+    color: $grey-1;
+    background-color: darken(#606dbc, 20%);
+    padding: 0.5rem 2rem;
+    border-radius: 99rem;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    font-size: 0.8rem;
+
+    &:hover {
+      background-color: darken(#606dbc, 10%);
+    }
+  }
+}
+
 .home {
   background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) ), url('https://user-images.githubusercontent.com/6455018/27762439-55f1348e-5e40-11e7-9f31-c74e7c792b8d.jpg') center center no-repeat;
   background-size: cover;
