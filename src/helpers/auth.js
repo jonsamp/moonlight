@@ -1,5 +1,5 @@
 import { ref, firebaseAuth, db } from '../config/constants';
-import { getUser } from './userActions'
+import { getUser } from './userActions';
 
 export function logout() {
   return firebaseAuth().signOut();
@@ -14,7 +14,6 @@ export function resetPassword(email) {
 }
 
 export function saveUser(user, firstName, lastName) {
-
   // Get the user's real name from the auth provider, or from their register form.
   const displayName = user.displayName || `${firstName} ${lastName}`;
 
@@ -24,12 +23,11 @@ export function saveUser(user, firstName, lastName) {
     displayName,
     uid: user.uid,
     avatarUrl: user.providerData[0].photoURL || `https://avatar.tobi.sh/${user.uid}`,
-    providerId: user.providerData[0].providerId.replace('.com', '')
+    providerId: user.providerData[0].providerId.replace('.com', ''),
   }).then(() => user);
 }
 
-export function deleteUser(userId, posts) {
-
+export function deleteUser(userId, posts = []) {
   // Collects updates
   const updates = {};
 
@@ -55,14 +53,14 @@ export function signInWithPopup(source) {
   const providers = {
     google: new firebaseAuth.GoogleAuthProvider(),
     twitter: new firebaseAuth.TwitterAuthProvider(),
-    facebook: new firebaseAuth.FacebookAuthProvider()
-  }
+    facebook: new firebaseAuth.FacebookAuthProvider(),
+  };
   return firebaseAuth().signInWithPopup(providers[source])
     .then((result) => {
       getUser(result.user.uid).then((data) => {
         if (!data) {
           saveUser(result.user);
         }
-      })
-    })
+      });
+    });
 }

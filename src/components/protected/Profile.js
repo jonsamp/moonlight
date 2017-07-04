@@ -59,7 +59,7 @@ class Profile extends Component {
   }
 
   handleDeleteAccountField = (e) => {
-    if (e.target.value === this.state.user.info.email) {
+    if ((e.target.value === this.state.user.info.email) || (e.target.value.match(/confirm/i))) {
       this.setState({ disableAccountDeletion: false });
     } else {
       this.setState({ disableAccountDeletion: true });
@@ -298,7 +298,7 @@ class Profile extends Component {
 
   render() {
     // Make sure the user is loaded, otherwise show a spinner
-    if (this.state.user.info) {
+    if (this.state.user && this.state.user.info) {
       const { info: { displayName, email, uid }, posts } = this.state.user;
       const avatarUrl = this.state.user.info.avatarUrl || this.state.user.info.avatar_url;
 
@@ -324,7 +324,16 @@ class Profile extends Component {
             <Col xs={12} sm={10} md={8} lg={6}>
               <section className="danger-zone">
                 <h2>Danger Zone</h2>
-                <p>Delete your account and all of your posts (past and present). This action is irreversible. To delete your account, type your email address below: <br /><code>{email}</code></p>
+                <p>Delete your account and all of your posts (past and present). This action is irreversible. To delete your account,
+                  { email ?
+                    <span>
+                      type your email address below: <br />
+                      <code>{email}</code>
+                    </span> :
+                    <span>
+                      type <code>confirm</code> in the input below.
+                    </span>
+                  }</p>
                 <form
                   onChange={this.handleDeleteAccountField}
                   className="user-personal-info"
@@ -341,7 +350,7 @@ class Profile extends Component {
                   </FormGroup>
                 </form>
                 <Button
-                  onClick={() => deleteUser(uid, Object.values(posts))}
+                  onClick={() => deleteUser(uid, posts)}
                   style={{
                     background: '#A91912',
                     color: 'white',
